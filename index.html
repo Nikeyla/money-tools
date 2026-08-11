@@ -543,6 +543,10 @@ footer{
   .sheet-mini{right:5px}
 }
 
+
+.tool-grid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:24px!important;align-items:stretch!important}
+.tool-card{min-width:0!important;width:auto!important}
+@media(max-width:900px){.tool-grid{grid-template-columns:1fr!important}}
 </style>
 </head>
 <body>
@@ -658,6 +662,7 @@ footer{
               <a class="btn btn-primary" href="paycheck-reset.html">Open The Paycheck-to-Monday Reset →</a>
             </div>
           </div>
+        </article>
 
         <article class="tool-card sheetwork-card">
           <div class="card-visual">
@@ -683,8 +688,6 @@ footer{
               <a class="btn btn-primary" href="sheetwork.html">Explore The SheetWork™ →</a>
             </div>
           </div>
-        </article>
-
         </article>
       </div>
     </div>
