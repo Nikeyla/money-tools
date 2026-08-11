@@ -588,6 +588,286 @@ body{
   .closing-grid{grid-template-columns:1fr}
 }
 
+
+/* ===== Premium Money Leak Check cover ===== */
+.premium-cover{
+  min-height:1085px;
+  background:
+    radial-gradient(circle at 86% 8%,rgba(208,162,82,.22),transparent 25%),
+    radial-gradient(circle at 3% 92%,rgba(33,140,145,.28),transparent 28%),
+    linear-gradient(140deg,#041f35 0%,#06365c 58%,#0d6268 100%) !important;
+}
+.cover-grid{
+  min-height:1085px;
+  display:grid;
+  grid-template-columns:1.02fr .98fr;
+  gap:32px;
+  padding:52px 54px 46px;
+  position:relative;
+  z-index:2;
+  align-items:center;
+}
+.cover-copy{
+  min-height:980px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  position:relative;
+}
+.cover-topline{
+  position:absolute;
+  top:0;left:0;right:0;
+}
+.premium-cover .cover-kicker{
+  margin-top:72px;
+  font-size:12px;
+  letter-spacing:1.8px;
+}
+.premium-cover h1{
+  font-size:70px;
+  max-width:560px;
+}
+.cover-lead{
+  max-width:600px !important;
+  font-size:17px !important;
+  line-height:1.68 !important;
+}
+.premium-cover .cover-points{
+  margin-top:30px;
+  grid-template-columns:1fr;
+  max-width:520px;
+}
+.premium-cover .cover-points div{
+  display:grid;
+  grid-template-columns:46px 1fr;
+  align-items:center;
+  gap:12px;
+  padding:13px 15px;
+  background:rgba(255,255,255,.055);
+}
+.premium-cover .cover-points b{
+  margin:0;
+  font-size:20px;
+}
+.premium-cover .cover-points span{
+  font-size:12px;
+}
+.premium-cover .cover-bottom{
+  position:absolute;
+  bottom:0;left:0;right:0;
+}
+
+.cover-visual{
+  min-height:820px;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.visual-stack{
+  width:100%;
+  max-width:390px;
+  position:relative;
+  padding:58px 0 70px;
+}
+.money-card{
+  background:#fff;
+  border-radius:18px;
+  box-shadow:0 28px 60px rgba(0,0,0,.28);
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.38);
+}
+.main-card{
+  transform:rotate(2deg);
+  position:relative;
+  z-index:3;
+}
+.money-card-head{
+  min-height:58px;
+  background:#f7faf9;
+  border-bottom:1px solid #dde9e8;
+  color:#06365c;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 18px;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:1px;
+}
+.mini-badge{
+  background:#dff1f1;
+  color:#147a80;
+  padding:6px 8px;
+  border-radius:999px;
+}
+.money-card-body{padding:17px}
+.spend-row{
+  display:grid;
+  grid-template-columns:1fr auto auto;
+  gap:10px;
+  align-items:center;
+  padding:13px 0;
+  border-bottom:1px solid #edf1f0;
+}
+.spend-row:last-of-type{border-bottom:0}
+.spend-row div{min-width:0}
+.merchant{
+  display:block;
+  color:#15324a;
+  font-size:12px;
+  font-weight:900;
+}
+.spend-row small{
+  display:block;
+  color:#7c8b91;
+  font-size:9px;
+  margin-top:2px;
+}
+.spend-row strong{
+  color:#06365c;
+  font-size:14px;
+}
+.pill{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:62px;
+  min-height:27px;
+  border-radius:999px;
+  font-size:8px;
+  font-weight:900;
+}
+.keep-pill{background:#e5f2eb;color:#2f7d5b}
+.change-pill{background:#f3e6ca;color:#946a22}
+.cut-pill{background:#e4f0f0;color:#147a80}
+.potential-box{
+  margin-top:16px;
+  padding:17px;
+  border-radius:12px;
+  background:linear-gradient(135deg,#06365c,#0d6268);
+  color:#fff;
+  text-align:center;
+}
+.potential-box span{
+  display:block;
+  color:#d7e8ea;
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:.8px;
+}
+.potential-box strong{
+  display:block;
+  font-family:Georgia,serif;
+  color:#d0a252;
+  font-size:40px;
+  margin:4px 0 1px;
+}
+.potential-box small{
+  color:#cbdce0;
+  font-size:9px;
+}
+.goal-card{
+  position:absolute;
+  left:-46px;
+  bottom:0;
+  width:230px;
+  z-index:4;
+  background:#fff;
+  border-radius:14px;
+  padding:18px;
+  box-shadow:0 20px 44px rgba(0,0,0,.20);
+  transform:rotate(-4deg);
+}
+.goal-label{
+  color:#147a80;
+  font-size:8px;
+  letter-spacing:.9px;
+  font-weight:900;
+}
+.goal-card strong{
+  display:block;
+  color:#06365c;
+  font-family:Georgia,serif;
+  font-size:26px;
+  margin:7px 0 0;
+}
+.goal-card > span{
+  display:block;
+  color:#b78332;
+  font-size:12px;
+  font-weight:900;
+  margin-top:2px;
+}
+.goal-line{
+  height:7px;
+  background:#edf2f1;
+  border-radius:999px;
+  margin:13px 0 10px;
+  overflow:hidden;
+}
+.goal-line i{
+  display:block;
+  width:68%;
+  height:100%;
+  background:linear-gradient(90deg,#218c91,#d0a252);
+  border-radius:999px;
+}
+.goal-card small{
+  color:#6c7d85;
+  font-size:9px;
+  line-height:1.4;
+}
+.accent-card{
+  position:absolute;
+  right:-24px;
+  top:25px;
+  z-index:2;
+  width:118px;
+  padding:13px 12px;
+  border-radius:12px;
+  background:rgba(4,31,53,.86);
+  border:1px solid rgba(255,255,255,.14);
+  box-shadow:0 16px 30px rgba(0,0,0,.16);
+  transform:rotate(6deg);
+}
+.accent-card span{
+  display:block;
+  color:#fff;
+  font-size:8px;
+  font-weight:900;
+  letter-spacing:1px;
+  padding:6px 0;
+  border-bottom:1px solid rgba(255,255,255,.09);
+}
+.accent-card span:last-child{border-bottom:0}
+.accent-card span:nth-child(1){color:#8dd2aa}
+.accent-card span:nth-child(2){color:#d0a252}
+.accent-card span:nth-child(3){color:#7bc9cd}
+.cover-orb{
+  position:absolute;
+  border-radius:50%;
+  border:1px solid rgba(255,255,255,.07);
+}
+.orb-one{width:520px;height:520px;right:-220px;top:-160px}
+.orb-two{width:340px;height:340px;left:-170px;bottom:-100px}
+
+@media(max-width:760px){
+  .cover-grid{
+    grid-template-columns:1fr;
+    padding:38px 26px 42px;
+  }
+  .cover-copy{min-height:auto;padding-bottom:30px}
+  .cover-topline,.premium-cover .cover-bottom{position:static}
+  .premium-cover .cover-kicker{margin-top:60px}
+  .premium-cover h1{font-size:50px}
+  .premium-cover .cover-bottom{margin-top:28px}
+  .cover-visual{min-height:610px}
+  .visual-stack{max-width:330px}
+  .goal-card{left:-8px}
+  .accent-card{right:-4px}
+}
+
 </style>
 </head>
 <body>
@@ -612,31 +892,83 @@ body{
 <div class="book">
 
 
-<section class="page brand-cover">
-  <div class="cover-glow cover-glow-one"></div>
-  <div class="cover-glow cover-glow-two"></div>
-  <div class="cover-inner">
-    <div class="cover-topline">
-      <span>FINANCIAL FREEDOM SHEETWORK™</span>
-      <span class="cover-chip">MONEY RESET TOOL</span>
-    </div>
-    <div class="cover-main">
-      <div class="cover-kicker">A 7-day spending reset</div>
+
+<section class="page brand-cover premium-cover">
+  <div class="cover-orb orb-one"></div>
+  <div class="cover-orb orb-two"></div>
+  <div class="cover-grid">
+    <div class="cover-copy">
+      <div class="cover-topline">
+        <span>FINANCIAL FREEDOM SHEETWORK™</span>
+        <span class="cover-chip">7-DAY MONEY RESET</span>
+      </div>
+
+      <div class="cover-kicker">Find what quietly drains your money</div>
       <h1>THE MONEY<br><span>LEAK CHECK™</span></h1>
       <div class="cover-rule"></div>
-      <p>Find the spending that quietly drains your money, decide what is actually worth keeping, and see what those choices could put back in your hands.</p>
+      <p class="cover-lead">A fast, interactive spending check that helps you spot the small choices adding up, decide what is worth keeping, and see what you could put back toward something that matters more.</p>
+
       <div class="cover-points">
-        <div><b>01</b><span>Review your real spending</span></div>
+        <div><b>01</b><span>Review the last 7 days</span></div>
         <div><b>02</b><span>Keep, change, or cut</span></div>
-        <div><b>03</b><span>See your potential money back</span></div>
+        <div><b>03</b><span>See your money-back potential</span></div>
+      </div>
+
+      <div class="cover-bottom">
+        <span>Little changes. Big freedom.</span>
+        <span>Created by Nikeyla Satchell</span>
       </div>
     </div>
-    <div class="cover-bottom">
-      <span>Little changes. Big freedom.</span>
-      <span>Created by Nikeyla Satchell</span>
+
+    <div class="cover-visual" aria-hidden="true">
+      <div class="visual-stack">
+        <div class="money-card main-card">
+          <div class="money-card-head">
+            <span>YOUR 7-DAY REVIEW</span>
+            <span class="mini-badge">LIVE</span>
+          </div>
+          <div class="money-card-body">
+            <div class="spend-row">
+              <div><span class="merchant">Takeout</span><small>Convenience</small></div>
+              <strong>$42</strong>
+              <span class="pill change-pill">CHANGE</span>
+            </div>
+            <div class="spend-row">
+              <div><span class="merchant">Streaming</span><small>Subscription</small></div>
+              <strong>$18</strong>
+              <span class="pill cut-pill">CUT</span>
+            </div>
+            <div class="spend-row">
+              <div><span class="merchant">Coffee Run</span><small>Small purchase</small></div>
+              <strong>$14</strong>
+              <span class="pill keep-pill">KEEP</span>
+            </div>
+            <div class="potential-box">
+              <span>POTENTIAL MONEY BACK</span>
+              <strong>$60</strong>
+              <small>from just this review</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="goal-card">
+          <div class="goal-label">WHAT COULD THAT BECOME?</div>
+          <strong>$60/week</strong>
+          <span>≈ $3,120/year</span>
+          <div class="goal-line"><i></i></div>
+          <small>Redirect it toward a goal you actually care about.</small>
+        </div>
+
+        <div class="accent-card">
+          <span>KEEP</span>
+          <span>CHANGE</span>
+          <span>CUT</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
+
 
 
 <section class="page native-page">
