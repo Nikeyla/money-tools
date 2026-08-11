@@ -1,847 +1,506 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Money Tools | The Financial Freedom SheetWork</title>
-<meta name="description" content="Interactive money tools designed to help you see where your money is going and make your next paycheck work harder.">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Money Made Clear™</title>
 <style>
 :root{
-  --navy:#062f50;
-  --navy2:#041f35;
-  --teal:#218c91;
-  --teal2:#147a80;
-  --gold:#d0a252;
-  --gold2:#b78332;
-  --cream:#fbf8f1;
-  --paper:#fffdf9;
+  --navy:#062b4d;
+  --navy2:#031d34;
+  --teal:#168d92;
+  --teal2:#0f6f74;
+  --gold:#d6a64a;
+  --gold2:#bd8832;
+  --cream:#fbfaf7;
+  --soft:#eef7f6;
   --ink:#15324a;
-  --muted:#667784;
-  --black:#101010;
-  --line:#d9e2e3;
-  --green:#2f7d5b;
-  --orange:#c96935;
+  --muted:#657983;
+  --line:#d8e6e6;
   --white:#fff;
 }
-
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
   margin:0;
-  font-family:Arial,Helvetica,sans-serif;
+  background:#f5f8f8;
   color:var(--ink);
-  background:
-    radial-gradient(circle at 18% 8%, rgba(33,140,145,.10), transparent 30%),
-    radial-gradient(circle at 88% 22%, rgba(208,162,82,.12), transparent 25%),
-    linear-gradient(180deg,#f8f6f0 0%,#f3f5f4 55%,#f7f3eb 100%);
+  font-family:Arial,Helvetica,sans-serif;
 }
-
-a{color:inherit}
-.shell{width:min(1180px,calc(100% - 34px));margin:0 auto}
-
-.topbar{
-  position:sticky;top:0;z-index:20;
-  background:rgba(4,31,53,.96);
-  backdrop-filter:blur(10px);
-  border-bottom:1px solid rgba(255,255,255,.10);
+a{text-decoration:none}
+.container{width:min(1180px,92%);margin:0 auto}
+.site-header{
+  position:sticky;top:0;z-index:50;
+  background:linear-gradient(90deg,var(--navy2),var(--navy));
+  color:#fff;border-bottom:1px solid rgba(255,255,255,.08);
 }
-.topbar-inner{
-  min-height:68px;
-  display:flex;align-items:center;justify-content:space-between;gap:22px;
-}
-.wordmark{
-  color:#fff;font-weight:900;letter-spacing:.4px;font-size:16px;
-}
-.wordmark span{color:var(--gold)}
-.top-note{
-  color:#d9e5ea;font-size:12px;font-weight:700;letter-spacing:.2px;
-}
-
-.hero{
-  padding:82px 0 42px;
-}
-.hero-grid{
-  display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center;
-}
-.kicker{
-  display:inline-flex;align-items:center;gap:9px;
-  font-size:12px;font-weight:900;letter-spacing:1.6px;text-transform:uppercase;
-  color:var(--teal2);margin-bottom:16px;
-}
-.kicker:before{content:"";width:34px;height:2px;background:var(--gold)}
-h1{
-  margin:0;
-  font-family:Georgia,serif;
-  color:var(--navy);
-  font-size:clamp(48px,7vw,84px);
-  line-height:.96;
-  letter-spacing:-2.5px;
-}
-h1 em{
-  display:block;color:var(--teal2);font-weight:400;
-}
-.hero-copy{
-  max-width:700px;
-  margin:24px 0 0;
-  font-size:18px;line-height:1.65;color:#465d6e;
-}
-.hero-copy strong{color:var(--navy)}
-.hero-cta{
-  display:flex;flex-wrap:wrap;gap:12px;margin-top:30px;
-}
-.btn{
-  display:inline-flex;align-items:center;justify-content:center;gap:8px;
-  min-height:48px;padding:0 22px;border-radius:7px;text-decoration:none;
-  font-weight:900;font-size:14px;transition:.2s ease;
-}
-.btn-primary{background:var(--navy);color:#fff;border:1px solid var(--navy)}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(6,47,80,.18)}
-.btn-secondary{background:#fff;color:var(--navy);border:1px solid #c9d7dc}
-.btn-secondary:hover{transform:translateY(-2px);border-color:var(--teal)}
-
-.hero-art{
-  position:relative;min-height:430px;display:flex;align-items:center;justify-content:center;
-}
-.orbit{
-  position:absolute;width:380px;height:380px;border:1px solid rgba(33,140,145,.25);
-  border-radius:50%;
-}
-.orbit:before,.orbit:after{
-  content:"";position:absolute;border-radius:50%;
-}
-.orbit:before{inset:35px;border:1px solid rgba(208,162,82,.30)}
-.orbit:after{inset:78px;background:rgba(255,255,255,.45);box-shadow:0 24px 60px rgba(6,47,80,.10)}
-.hero-card{
-  position:relative;z-index:2;width:325px;background:var(--paper);
-  border:1px solid #dce5e5;border-radius:18px;
-  box-shadow:0 24px 60px rgba(6,47,80,.18);overflow:hidden;
-  transform:rotate(2deg);
-}
-.hero-card-head{
-  padding:22px 24px;background:var(--navy);color:#fff;border-bottom:3px solid var(--gold);
-}
-.hero-card-head small{display:block;color:#bcd5da;text-transform:uppercase;letter-spacing:1.3px;font-weight:900}
-.hero-card-head strong{display:block;font-family:Georgia,serif;font-size:27px;margin-top:7px;line-height:1.05}
-.hero-card-body{padding:24px}
-.mini-line{height:10px;background:#e5eeee;border-radius:999px;margin:10px 0}
-.mini-line.gold{background:#ead9b8;width:70%}
-.mini-line.teal{background:#c7e3e2;width:84%}
-.mini-stat{
-  display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px;
-}
-.mini-stat div{
-  background:#f3f8f8;border:1px solid #dbe8e8;border-radius:8px;padding:15px 10px;text-align:center;
-}
-.mini-stat b{display:block;color:var(--teal2);font-size:20px}
-.mini-stat span{font-size:9px;text-transform:uppercase;font-weight:900;color:#687782}
-
-.trust-strip{
-  margin-top:32px;background:#fff;border-top:1px solid #e4e7e5;border-bottom:1px solid #e4e7e5;
-}
-.trust-grid{
-  display:grid;grid-template-columns:repeat(3,1fr);
-}
-.trust-item{padding:22px 26px;text-align:center}
-.trust-item + .trust-item{border-left:1px solid #e4e7e5}
-.trust-item strong{display:block;font-size:13px;color:var(--navy)}
-.trust-item span{font-size:12px;color:#6e7d86;line-height:1.45}
-
-.tools{padding:76px 0 88px}
-.section-head{text-align:center;max-width:720px;margin:0 auto 38px}
-.section-eyebrow{font-size:12px;font-weight:900;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold2)}
-.section-head h2{
-  font-family:Georgia,serif;color:var(--navy);font-size:44px;line-height:1.05;margin:10px 0 13px;
-}
-.section-head p{margin:0;color:#5c6d79;line-height:1.65;font-size:16px}
-
-.tool-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
-.tool-card{
-  position:relative;overflow:hidden;border-radius:20px;background:#fff;
-  border:1px solid #dce3e2;box-shadow:0 18px 44px rgba(21,50,74,.10);
-  display:flex;flex-direction:column;min-height:560px;
-}
-.tool-card:before{
-  content:"";position:absolute;left:0;right:0;top:0;height:7px;
-}
-.leak:before{background:linear-gradient(90deg,#111 0 55%,var(--gold) 55%)}
-.reset:before{background:linear-gradient(90deg,var(--navy) 0 58%,var(--teal) 58% 84%,var(--gold) 84%)}
-.sheetwork-card:before{background:linear-gradient(90deg,var(--navy2) 0 48%,var(--teal) 48% 78%,var(--gold) 78%)}
-.sheetwork-card .card-visual{
-  background:
-    radial-gradient(circle at 84% 18%,rgba(208,162,82,.22),transparent 24%),
-    linear-gradient(145deg,var(--navy2) 0%,var(--navy) 58%,#0d5a61 100%);
-}
-.sheetwork-card .visual-title span{color:#72cfd0}
-.sheetwork-card .visual-rule{background:var(--gold)}
-.sheetwork-card .card-action .btn{background:var(--teal2);border-color:var(--teal2)}
-
-.card-visual{
-  margin:28px 28px 0;border-radius:13px;overflow:hidden;min-height:220px;position:relative;
-}
-.leak .card-visual{
-  background:
-    radial-gradient(circle at 88% 16%,rgba(215,170,90,.22),transparent 25%),
-    linear-gradient(145deg,#111 0%,#1c1c1c 68%,#2a241b 100%);
-}
-.reset .card-visual{
-  background:
-    radial-gradient(circle at 84% 18%,rgba(201,151,71,.20),transparent 24%),
-    linear-gradient(145deg,var(--navy2) 0%,var(--navy) 63%,#0f555b 100%);
-}
-.visual-inner{
-  position:absolute;inset:0;padding:27px;color:#fff;display:flex;flex-direction:column;justify-content:space-between;
-}
-.visual-badge{
-  align-self:flex-start;border:1px solid rgba(255,255,255,.30);border-radius:999px;
-  padding:7px 10px;font-size:10px;font-weight:900;letter-spacing:1px;text-transform:uppercase;
-}
-.visual-title{font-family:Georgia,serif;font-size:34px;line-height:1.02;max-width:360px}
-.visual-title span{color:var(--gold)}
-.reset .visual-title span{color:#82d2d2}
-.visual-rule{width:76px;height:3px;background:var(--gold);border-radius:10px;margin-top:16px}
-.reset .visual-rule{background:var(--teal)}
-
-.card-body{padding:26px 30px 32px;display:flex;flex:1;flex-direction:column}
-.card-label{font-size:11px;font-weight:900;letter-spacing:1.4px;text-transform:uppercase;color:var(--teal2)}
-.card-body h3{font-family:Georgia,serif;font-size:32px;color:var(--navy);margin:7px 0 10px;line-height:1.05}
-.card-body p{color:#5f6f79;line-height:1.6;margin:0;font-size:14px}
-.benefits{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:20px 0 24px}
-.benefit{
-  background:#f7f9f8;border:1px solid #e3e9e8;border-radius:8px;padding:11px 12px;
-  font-size:11px;font-weight:800;color:#42596a;
-}
-.card-action{margin-top:auto}
-.card-action .btn{width:100%;min-height:50px}
-.leak .card-action .btn{background:#111;border-color:#111}
-.reset .card-action .btn{background:var(--navy);border-color:var(--navy)}
-
-.how{
-  padding:72px 0;background:var(--navy2);color:#fff;position:relative;overflow:hidden;
-}
-.how:before{
-  content:"";position:absolute;width:460px;height:460px;border:1px solid rgba(255,255,255,.08);
-  border-radius:50%;right:-140px;top:-160px;
-}
-.how-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:60px;align-items:start}
-.how h2{font-family:Georgia,serif;font-size:42px;line-height:1.05;margin:9px 0 15px}
-.how p{color:#c9d7df;line-height:1.65;margin:0}
-.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.step{
-  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);
-  border-radius:13px;padding:22px 18px;min-height:180px;
-}
-.step-num{font-family:Georgia,serif;color:var(--gold);font-size:34px}
-.step strong{display:block;margin:12px 0 6px;font-size:14px}
-.step span{font-size:12px;line-height:1.5;color:#b8c9d2}
-
-.final{
-  padding:76px 0;text-align:center;
-}
-.final-box{
-  max-width:880px;margin:0 auto;background:#fff;border:1px solid #dce4e2;border-radius:20px;
-  box-shadow:0 18px 50px rgba(21,50,74,.08);padding:48px 32px;position:relative;overflow:hidden;
-}
-.final-box:before,.final-box:after{
-  content:"";position:absolute;top:0;height:5px;width:50%;
-}
-.final-box:before{left:0;background:var(--teal)}
-.final-box:after{right:0;background:var(--gold)}
-.final h2{font-family:Georgia,serif;font-size:42px;color:var(--navy);margin:0 0 12px}
-.final p{max-width:650px;margin:0 auto 25px;color:#60717c;line-height:1.65}
-
-footer{
-  background:#111;color:#fff;border-top:3px solid var(--gold);
-}
-.footer-inner{
-  min-height:92px;display:flex;align-items:center;justify-content:space-between;gap:24px;
-}
-.footer-brand{font-family:Georgia,serif;font-size:18px}
-.footer-brand span{color:var(--gold)}
-.footer-copy{font-size:11px;color:#aaa;text-align:right}
-
-@media(max-width:900px){
-  .hero-grid,.how-grid{grid-template-columns:1fr}
-  .hero-art{min-height:370px}
-  .tool-grid{grid-template-columns:1fr}
-  .steps{grid-template-columns:1fr}
-}
-@media(max-width:620px){
-  .top-note{display:none}
-  .hero{padding-top:55px}
-  h1{font-size:48px;letter-spacing:-1.5px}
-  .hero-copy{font-size:16px}
-  .hero-art{min-height:330px}
-  .orbit{width:300px;height:300px}
-  .hero-card{width:280px}
-  .trust-grid{grid-template-columns:1fr}
-  .trust-item + .trust-item{border-left:0;border-top:1px solid #e4e7e5}
-  .benefits{grid-template-columns:1fr}
-  .section-head h2,.how h2,.final h2{font-size:36px}
-  .card-body h3{font-size:28px}
-  .footer-inner{flex-direction:column;justify-content:center;text-align:center;padding:22px 0}
-  .footer-copy{text-align:center}
-}
-
-/* SheetWork conversion section */
-.sheetwork{
-  padding:84px 0;
-  background:
-    radial-gradient(circle at 8% 15%, rgba(33,140,145,.15), transparent 26%),
-    linear-gradient(135deg,#041f35 0%,#06365c 58%,#0c5960 100%);
-  color:#fff;
-  position:relative;
-  overflow:hidden;
-}
-.sheetwork:before{
-  content:"";
-  position:absolute;
-  width:520px;height:520px;
-  border:1px solid rgba(201,151,71,.15);
-  border-radius:50%;
-  right:-180px;top:-210px;
-}
-.sheetwork-grid{
-  display:grid;
-  grid-template-columns:.88fr 1.12fr;
-  gap:58px;
-  align-items:center;
-  position:relative;
-  z-index:2;
-}
-.sheet-mockup{
-  position:relative;
-  min-height:520px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-.sheet-window{
-  width:min(100%,470px);
-  background:#fff;
-  border-radius:16px;
-  overflow:hidden;
-  box-shadow:0 30px 70px rgba(0,0,0,.28);
-  transform:rotate(-1.5deg);
-  border:1px solid rgba(255,255,255,.22);
-}
-.sheet-top{
-  min-height:72px;
-  background:#041f35;
-  border-bottom:4px solid #d0a252;
-  color:#fff;
+.nav{
+  min-height:76px;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:0 22px;
+  gap:24px;
 }
-.sheet-logo{
-  font-family:Georgia,serif;
-  font-size:23px;
-  line-height:1;
+.brand{
+  display:flex;align-items:center;gap:12px;color:#fff;
 }
-.sheet-logo span{color:#55bfc2}
-.sheet-badge{
-  color:#d0a252;
-  font-size:10px;
-  font-weight:900;
-  letter-spacing:1.2px;
+.logo-mark{
+  width:42px;height:42px;border:2px solid var(--gold);
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  color:var(--gold);font-weight:900;font-size:18px;
 }
-.sheet-body{
-  padding:24px;
-  background:#fbfaf7;
+.brand-copy strong{display:block;font-size:18px;letter-spacing:.4px}
+.brand-copy small{display:block;color:var(--gold);font-size:10px;margin-top:2px}
+.nav-links{display:flex;align-items:center;gap:28px}
+.nav-links a{color:#fff;font-size:11px;font-weight:900}
+.nav-links a:hover{color:var(--gold)}
+.nav-cta{
+  color:var(--gold)!important;
+  border:1px solid var(--gold);
+  padding:10px 14px;border-radius:7px;
 }
-.sheet-dashboard{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:11px;
-}
-.sheet-kpi{
-  min-height:84px;
-  padding:13px;
-  border-radius:8px;
-  border:1px solid #d8e5e5;
-  background:#fff;
-}
-.sheet-kpi small{
-  display:block;
-  font-size:9px;
-  font-weight:900;
-  color:#6c7b84;
-  text-transform:uppercase;
-  margin-bottom:9px;
-}
-.sheet-kpi strong{
-  display:block;
-  color:#06365c;
-  font-size:19px;
-}
-.sheet-kpi.teal strong{color:#147a80}
-.sheet-chart{
-  height:130px;
-  margin-top:12px;
-  border:1px solid #d8e5e5;
-  border-radius:8px;
+.hero{
   background:
-    linear-gradient(180deg,transparent 24%,#edf3f3 25%,transparent 26%,transparent 49%,#edf3f3 50%,transparent 51%,transparent 74%,#edf3f3 75%,transparent 76%),
-    linear-gradient(120deg,transparent 0 12%,#218c91 13% 14%,transparent 15% 31%,#218c91 32% 33%,transparent 34% 53%,#d0a252 54% 55%,transparent 56% 73%,#218c91 74% 75%,transparent 76%);
-  background-color:#fff;
-  position:relative;
+    radial-gradient(circle at 85% 12%,rgba(214,166,74,.10),transparent 28%),
+    linear-gradient(180deg,#fff,#f9fbfb);
+  padding:54px 0 42px;
 }
-.sheet-chart:before{
-  content:"90-DAY MONEY OUTLOOK";
-  position:absolute;
-  top:10px;left:12px;
-  font-size:9px;font-weight:900;color:#61727c;
+.hero-grid{
+  display:grid;
+  grid-template-columns:.95fr 1.05fr;
+  gap:44px;
+  align-items:center;
 }
-.sheet-mini{
-  position:absolute;
-  right:-22px;
-  bottom:28px;
-  width:160px;
-  background:#fff;
-  border:1px solid #dce7e7;
-  border-radius:13px;
-  box-shadow:0 18px 38px rgba(0,0,0,.20);
-  padding:15px;
-  transform:rotate(3deg);
-}
-.sheet-mini strong{
-  color:#06365c;
-  font-size:12px;
-}
-.sheet-mini p{
-  color:#60717c;
-  font-size:9px;
-  line-height:1.45;
-  margin:8px 0 0;
-}
-
-.sheetwork-copy .section-eyebrow{color:#d7aa5a}
-.sheetwork-copy h2{
+.hero h1{
   font-family:Georgia,serif;
-  font-size:46px;
-  line-height:1.03;
-  margin:10px 0 17px;
+  font-size:56px;
+  line-height:1.02;
+  margin:0 0 18px;
+  color:var(--navy);
 }
-.sheetwork-copy h2 span{color:#72cfd0}
-.sheetwork-lead{
-  color:#d0dde4;
-  font-size:17px;
-  line-height:1.7;
-  margin:0 0 24px;
-  max-width:650px;
+.hero h1 span{color:var(--teal)}
+.hero p{
+  font-size:15px;line-height:1.65;color:#495f6b;
+  max-width:570px;margin:0 0 22px;
 }
-.sheet-promise{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-  margin:22px 0 28px;
+.trust-row{display:flex;gap:22px;flex-wrap:wrap;margin:20px 0}
+.trust-item{display:flex;align-items:center;gap:8px;font-size:11px;font-weight:800;color:var(--navy)}
+.trust-icon{
+  width:27px;height:27px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  background:#e7f3f3;color:var(--teal);font-weight:900;
 }
-.promise{
-  border:1px solid rgba(255,255,255,.14);
-  background:rgba(255,255,255,.06);
-  border-radius:10px;
-  padding:14px 15px;
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-height:48px;padding:0 20px;border-radius:7px;font-size:11px;font-weight:900;
 }
-.promise strong{
-  display:block;
-  color:#fff;
-  font-size:13px;
-  margin-bottom:4px;
+.btn-primary{background:var(--teal2);color:#fff}
+.btn-secondary{border:1px solid var(--gold);color:var(--gold2);background:#fff}
+.hero-note{
+  margin-top:12px;font-family:Georgia,serif;font-style:italic;color:var(--navy);
+  font-size:17px;display:inline-block;border-bottom:2px solid var(--gold);padding-bottom:4px;
 }
-.promise span{
-  color:#b9cbd3;
-  font-size:11px;
-  line-height:1.45;
+.hero-visual{position:relative;min-height:430px}
+.laptop{
+  position:absolute;right:0;top:0;width:88%;
+  background:#111;border-radius:17px;padding:12px;
+  box-shadow:0 24px 50px rgba(6,43,77,.24);
 }
-.sheetwork-bridge{
-  margin:22px 0;
-  padding:18px 20px;
-  border-left:3px solid #d0a252;
-  background:rgba(255,255,255,.05);
-  color:#dbe6eb;
-  line-height:1.6;
-  font-size:14px;
+.screen{
+  background:#fff;border-radius:8px;padding:14px;
+  min-height:300px;
 }
-.sheetwork-actions{
-  display:flex;
-  gap:12px;
-  flex-wrap:wrap;
+.screen-head{
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:10px;font-weight:900;color:var(--navy);margin-bottom:12px;
 }
-.btn-gold{
-  background:#d0a252;
-  color:#082c4b;
-  border:1px solid #d0a252;
+.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.kpi{
+  border:1px solid var(--line);border-radius:8px;padding:10px;text-align:center;
 }
-.btn-gold:hover{
-  transform:translateY(-2px);
-  box-shadow:0 9px 22px rgba(208,162,82,.18);
+.kpi small{display:block;color:var(--muted);font-size:7px;font-weight:900}
+.kpi strong{display:block;color:var(--navy);font-size:18px;margin:4px 0}
+.dashboard-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px
 }
-
-.sheet-details{
-  padding:72px 0;
-  background:#f7f9f8;
+.dash-card{
+  border:1px solid var(--line);border-radius:9px;padding:12px;min-height:120px;background:#fff
 }
-.sheet-details-grid{
-  display:grid;
-  grid-template-columns:.8fr 1.2fr;
-  gap:46px;
-  align-items:start;
+.dash-card h4{margin:0 0 8px;font-size:9px;color:var(--navy)}
+.donut{
+  width:82px;height:82px;margin:3px auto;border-radius:50%;
+  background:conic-gradient(var(--teal) 0 30%,var(--gold) 30% 55%,#6f5ab6 55% 72%,#83b59c 72% 100%);
+  position:relative
 }
-.sheet-details h2{
-  font-family:Georgia,serif;
-  color:#06365c;
-  font-size:40px;
-  line-height:1.05;
-  margin:8px 0 14px;
+.donut:after{
+  content:"";position:absolute;inset:18px;background:#fff;border-radius:50%
 }
-.sheet-details p{
-  color:#61727c;
-  line-height:1.65;
+.phone{
+  position:absolute;left:0;bottom:16px;width:27%;
+  background:#121212;border-radius:22px;padding:8px;
+  box-shadow:0 18px 35px rgba(0,0,0,.22)
 }
-.sheet-benefits{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:13px;
+.phone-screen{
+  background:#fff;border-radius:15px;padding:10px;min-height:220px;
 }
-.sheet-benefit{
-  background:#fff;
-  border:1px solid #dbe6e5;
-  border-radius:11px;
-  padding:19px;
-  min-height:130px;
+.phone-screen strong{display:block;color:var(--navy);font-size:11px;margin-bottom:9px}
+.phone-kpi{
+  border:1px solid var(--line);border-radius:7px;padding:9px;text-align:center;margin-bottom:8px
 }
-.sheet-benefit .icon{
-  width:35px;height:35px;
-  display:flex;align-items:center;justify-content:center;
-  border-radius:50%;
-  background:#e2f2f2;
-  color:#147a80;
-  font-weight:900;
-  margin-bottom:12px;
+.phone-kpi small{font-size:7px;color:var(--muted)} .phone-kpi b{display:block;color:var(--teal);font-size:17px;margin-top:3px}
+.mug{
+  position:absolute;right:-10px;bottom:16px;width:92px;height:106px;border-radius:10px 10px 20px 20px;
+  background:linear-gradient(145deg,#0a425e,#0f7080);color:var(--gold);
+  display:flex;align-items:center;justify-content:center;text-align:center;
+  font-family:Georgia,serif;font-size:14px;line-height:1.15;padding:10px;
+  box-shadow:0 12px 25px rgba(0,0,0,.16)
 }
-.sheet-benefit strong{
-  display:block;
-  color:#06365c;
-  font-size:14px;
-  margin-bottom:6px;
+.section{padding:50px 0}
+.section-title{text-align:center;margin-bottom:24px}
+.section-title .eyebrow{
+  color:var(--teal);font-size:10px;font-weight:900;letter-spacing:1px
 }
-.sheet-benefit span{
-  display:block;
-  color:#697983;
-  font-size:11px;
-  line-height:1.5;
+.section-title h2{
+  margin:7px 0 6px;font-family:Georgia,serif;color:var(--navy);font-size:34px
 }
-
+.section-title p{margin:0;color:var(--muted);font-size:12px}
+.free-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.tool-card{
+  background:#fff;border:1px solid var(--line);border-radius:16px;padding:24px;
+  box-shadow:0 10px 24px rgba(12,60,82,.05)
+}
+.tool-icon{
+  width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  color:#fff;font-size:24px;font-weight:900;margin-bottom:14px
+}
+.tool-card:nth-child(1) .tool-icon{background:var(--teal2)}
+.tool-card:nth-child(2) .tool-icon{background:#164fbf}
+.tool-card:nth-child(3) .tool-icon{background:#6840b6}
+.tool-card h3{margin:0;color:var(--navy);font-size:21px;line-height:1.15}
+.tool-card .product{margin-top:6px;color:var(--teal2);font-size:10px;font-weight:900}
+.tool-card p{color:var(--muted);font-size:11px;line-height:1.55;min-height:52px}
+.free-pill{
+  display:inline-block;background:#e7f3f3;color:var(--teal2);padding:6px 10px;border-radius:999px;
+  font-size:8px;font-weight:900;margin:8px 0 12px
+}
+.tool-card .card-btn{
+  display:block;background:var(--navy);color:#fff;text-align:center;padding:12px;border-radius:7px;font-size:10px;font-weight:900
+}
+.tool-card:nth-child(1) .card-btn{background:var(--teal2)}
+.tool-card:nth-child(2) .card-btn{background:#164fbf}
+.tool-card:nth-child(3) .card-btn{background:#6840b6}
+.tool-card .foot{font-size:8px;color:#72838c;text-align:center;margin-top:9px}
+.deeper{
+  margin-top:26px;background:#fff;border:1px solid #ead8b0;border-radius:15px;padding:22px 26px
+}
+.deeper-head{text-align:center;margin-bottom:16px}
+.deeper-head strong{font-size:16px;color:var(--navy)}
+.deeper-head p{margin:4px 0 0;font-size:10px;color:var(--muted)}
+.deep-grid{display:grid;grid-template-columns:repeat(3,1fr)}
+.deep-item{padding:8px 22px;border-right:1px solid #e8e2d8}
+.deep-item:last-child{border-right:0}
+.deep-icon{color:var(--gold2);font-size:28px;margin-bottom:8px}
+.deep-item strong{display:block;color:#8b5e1c;font-size:13px;margin-bottom:6px}
+.deep-item p{font-size:9.5px;color:#61727b;line-height:1.45;min-height:55px}
+.deep-item a{font-size:9px;font-weight:900;color:#a46d1d}
+.system-wrap{
+  margin-top:28px;
+  border-radius:18px;
+  background:
+    radial-gradient(circle at 90% 10%,rgba(214,166,74,.18),transparent 26%),
+    linear-gradient(145deg,var(--navy2),var(--navy) 66%,#0d5e65);
+  color:#fff;padding:36px;overflow:hidden
+}
+.system-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:30px;align-items:center}
+.system-kicker{font-size:10px;font-weight:900;color:var(--gold);letter-spacing:1px}
+.system-wrap h2{
+  font-family:Georgia,serif;font-size:40px;line-height:1.03;margin:10px 0;color:#fff
+}
+.system-wrap h2 span{color:#5cc7c9}
+.system-tagline{font-family:Georgia,serif;font-style:italic;color:var(--gold);font-size:18px}
+.system-wrap p{font-size:11px;line-height:1.6;color:#d8e6e8}
+.system-icons{display:flex;gap:18px;flex-wrap:wrap;margin-top:20px}
+.system-icons div{font-size:8px;color:#dce8eb;text-align:center}
+.system-icons span{display:block;font-size:22px;color:#65c8ca;margin-bottom:5px}
+.system-dashboard{
+  background:#0d1117;padding:10px;border-radius:14px;box-shadow:0 20px 45px rgba(0,0,0,.22)
+}
+.system-screen{background:#fff;border-radius:8px;padding:12px}
+.system-screen .kpi-row .kpi strong{font-size:15px}
+.system-bottom{display:grid;grid-template-columns:1.1fr .9fr;gap:9px;margin-top:9px}
+.chart{
+  height:90px;border:1px solid var(--line);border-radius:8px;padding:10px;
+  display:flex;align-items:flex-end;gap:8px
+}
+.bar{flex:1;background:linear-gradient(180deg,var(--teal),#7dcfd1);border-radius:4px 4px 0 0}
+.b1{height:62%}.b2{height:40%}.b3{height:70%}.b4{height:52%}.b5{height:78%}
+.system-cta{
+  display:flex;justify-content:center;margin-top:22px
+}
+.system-cta a{
+  background:linear-gradient(90deg,#c99238,#dfa942);color:#102d47;
+  font-weight:900;font-size:11px;padding:14px 28px;border-radius:7px
+}
+.system-meta{
+  text-align:center;margin-top:10px;font-size:8px;color:#d8e4e7
+}
+.benefits{
+  margin-top:26px;background:#fff;border:1px solid var(--line);border-radius:14px;
+  display:grid;grid-template-columns:repeat(4,1fr)
+}
+.benefit{padding:20px 22px;border-right:1px solid var(--line)}
+.benefit:last-child{border-right:0}
+.benefit span{font-size:30px;color:var(--teal)}
+.benefit strong{display:block;color:var(--teal2);font-size:11px;margin:7px 0 4px}
+.benefit p{font-size:9px;color:var(--muted);line-height:1.4;margin:0}
+footer{
+  background:linear-gradient(90deg,var(--navy2),var(--navy));color:#fff;padding:28px 0
+}
+.footer-grid{display:flex;justify-content:space-between;gap:20px;align-items:center;flex-wrap:wrap}
+.footer-links{display:flex;gap:20px;flex-wrap:wrap}
+.footer-links a{color:#fff;font-size:9px;font-weight:800}
+.footer-small{font-size:8px;color:#aabfc7;margin-top:10px}
 @media(max-width:900px){
-  .sheetwork-grid,.sheet-details-grid{grid-template-columns:1fr}
-  .sheet-mockup{min-height:440px}
+  .nav-links{display:none}
+  .hero-grid,.system-grid{grid-template-columns:1fr}
+  .hero-visual{min-height:390px}
+  .free-grid,.deep-grid,.benefits{grid-template-columns:1fr}
+  .deep-item,.benefit{border-right:0;border-bottom:1px solid var(--line)}
+  .deep-item:last-child,.benefit:last-child{border-bottom:0}
 }
 @media(max-width:620px){
-  .sheet-promise,.sheet-benefits{grid-template-columns:1fr}
-  .sheetwork-copy h2{font-size:38px}
-  .sheet-mini{right:5px}
+  .hero h1{font-size:42px}
+  .laptop{width:95%}
+  .phone{width:32%}
+  .mug{display:none}
+  .kpi-row{grid-template-columns:1fr 1fr}
+  .dashboard-grid{grid-template-columns:1fr}
+  .system-wrap{padding:26px 20px}
 }
-
-
-.tool-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:24px!important;align-items:stretch!important}
-.tool-card{min-width:0!important;width:auto!important}
-@media(max-width:900px){.tool-grid{grid-template-columns:1fr!important}}
-
-.afford-card:before{background:linear-gradient(90deg,var(--navy) 0 48%,var(--teal) 48% 78%,var(--gold) 78%)}
-.afford-card .card-visual{
-  background:
-    radial-gradient(circle at 85% 16%,rgba(208,162,82,.22),transparent 24%),
-    linear-gradient(145deg,#06365c 0%,#0b5361 62%,#147a80 100%);
-}
-.afford-card .visual-title span{color:#f1c96f}
-.afford-card .visual-rule{background:var(--gold)}
-.afford-card .card-action .btn{background:var(--teal2);border-color:var(--teal2)}
-
 </style>
 </head>
 <body>
 
-<header class="topbar">
-  <div class="shell topbar-inner">
-    <div class="wordmark">THE FINANCIAL FREEDOM <span>SHEETWORK™</span></div>
-    <div class="top-note">Interactive tools for real-life money decisions</div>
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand" href="#">
+      <div class="logo-mark">↗</div>
+      <div class="brand-copy">
+        <strong>MONEY MADE CLEAR™</strong>
+        <small>Tools for today. A system for your future.</small>
+      </div>
+    </a>
+    <nav class="nav-links">
+      <a href="#home">HOME</a>
+      <a href="#tools">TOOLS</a>
+      <a href="#system">SHEETWORK™ SYSTEM</a>
+      <a href="#how">HOW IT WORKS</a>
+      <a href="#about">ABOUT</a>
+      <a href="#">HELP</a>
+      <a class="nav-cta" href="#">MY ACCOUNT</a>
+    </nav>
   </div>
 </header>
 
 <main>
-  <section class="hero">
-    <div class="shell hero-grid">
-      <div>
-        <div class="kicker">Money clarity starts here</div>
-        <h1>Know your money.<em>Change your week.</em></h1>
-        <p class="hero-copy">
-          These aren't worksheets you fill out and forget. They're <strong>interactive money tools</strong> built to help you spot what's draining your money, see what you actually have room for, and make your next move with more confidence.
-        </p>
-        <div class="hero-cta">
-          <a class="btn btn-primary" href="#tools">Choose a Tool ↓</a>
-          <a class="btn btn-secondary" href="#how">How It Works</a>
-          <a class="btn btn-secondary" href="#sheetwork">Meet the Full SheetWork™</a>
-        </div>
+<section class="hero" id="home">
+  <div class="container hero-grid">
+    <div>
+      <h1>Money can feel complicated.<br><span>We make it clear.</span></h1>
+      <p>Free tools for quick answers to real money questions. A complete system to bring your whole financial life together with confidence.</p>
+
+      <div class="trust-row">
+        <div class="trust-item"><span class="trust-icon">✓</span>100% Private</div>
+        <div class="trust-item"><span class="trust-icon">🔒</span>No Sign-Up</div>
+        <div class="trust-item"><span class="trust-icon">☁</span>No Data Stored</div>
       </div>
 
-      <div class="hero-art" aria-hidden="true">
-        <div class="orbit"></div>
-        <div class="hero-card">
-          <div class="hero-card-head">
-            <small>Your money, made clearer</small>
-            <strong>A better decision starts with the right number.</strong>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#tools">START WITH A FREE TOOL →</a>
+        <a class="btn btn-secondary" href="#system">EXPLORE THE SYSTEM →</a>
+      </div>
+      <div class="hero-note">Clarity today. Freedom tomorrow.</div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="laptop">
+        <div class="screen">
+          <div class="screen-head"><span>Good morning, you've got this! 💪</span><span>Money Made Clear</span></div>
+          <div class="kpi-row">
+            <div class="kpi"><small>SAFE TO SPEND</small><strong>$47.67</strong><span>Today</span></div>
+            <div class="kpi"><small>DAYS UNTIL PAYDAY</small><strong>6</strong><span>Aug 25</span></div>
+            <div class="kpi"><small>PROTECTED SAVINGS</small><strong>$286</strong><span>Set aside</span></div>
+            <div class="kpi"><small>UPCOMING BILLS</small><strong>$1,250</strong><span>Due soon</span></div>
           </div>
-          <div class="hero-card-body">
-            <div class="mini-line teal"></div>
-            <div class="mini-line"></div>
-            <div class="mini-line gold"></div>
-            <div class="mini-stat">
-              <div><b>SEE</b><span>what's happening</span></div>
-              <div><b>DECIDE</b><span>what changes next</span></div>
+          <div class="dashboard-grid">
+            <div class="dash-card">
+              <h4>TODAY'S FOCUS</h4>
+              <p style="font-size:9px;color:#667c88;line-height:1.5;margin:0">You're on track. Focus on keeping small spending in check.</p>
+            </div>
+            <div class="dash-card">
+              <h4>TOP SPENDING THIS WEEK</h4>
+              <div class="donut"></div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
 
-  <div class="trust-strip">
-    <div class="shell trust-grid">
-      <div class="trust-item"><strong>Interactive, not static</strong><span>Your numbers update as you type.</span></div>
-      <div class="trust-item"><strong>Made for real life</strong><span>Clear language, practical decisions, no finance degree required.</span></div>
-      <div class="trust-item"><strong>Your entries stay with you</strong><span>Each tool saves progress in your browser on that device.</span></div>
+      <div class="phone">
+        <div class="phone-screen">
+          <strong>Good morning 👋</strong>
+          <div class="phone-kpi"><small>Safe to Spend</small><b>$47.67</b></div>
+          <div class="phone-kpi"><small>Days Until Payday</small><b>6</b></div>
+          <div class="phone-kpi"><small>Protected</small><b>$286</b></div>
+        </div>
+      </div>
+
+      <div class="mug">Clear choices.<br>Better future.</div>
     </div>
   </div>
+</section>
 
-  <section class="tools" id="tools">
-    <div class="shell">
-      <div class="section-head">
-        <div class="section-eyebrow">Choose what you need today</div>
-        <h2>Three focused tools. One complete money system.</h2>
-        <p>Choose the tool that matches the money decision in front of you, or explore The Financial Freedom SheetWork™ when you're ready to connect the bigger picture.</p>
+<section class="section" id="tools">
+  <div class="container">
+    <div class="section-title">
+      <div class="eyebrow">START WITH A FREE TOOL</div>
+      <h2>What do you need help with today?</h2>
+      <p>Get a quick answer in less than 2 minutes. Always free. Always private.</p>
+    </div>
+
+    <div class="free-grid">
+      <article class="tool-card">
+        <div class="tool-icon">💧</div>
+        <h3>Where is my money going?</h3>
+        <div class="product">MONEY LEAK CHECK™</div>
+        <p>Spot the small leaks that could be costing you more than you think.</p>
+        <span class="free-pill">FREE FOREVER</span>
+        <a class="card-btn" href="money-leak-check-free.html">START FREE CHECK →</a>
+        <div class="foot">See what you could save in 2 minutes.</div>
+      </article>
+
+      <article class="tool-card">
+        <div class="tool-icon">📅</div>
+        <h3>How much can I safely spend until payday?</h3>
+        <div class="product">PAYCHECK-TO-MONDAY RESET™</div>
+        <p>See your money from today until your next payday.</p>
+        <span class="free-pill">FREE FOREVER</span>
+        <a class="card-btn" href="paycheck-monday-free.html">START FREE RESET →</a>
+        <div class="foot">Know what's safe to spend in 2 minutes.</div>
+      </article>
+
+      <article class="tool-card">
+        <div class="tool-icon">🛒</div>
+        <h3>Can I afford this?</h3>
+        <div class="product">CAN I AFFORD IT?™</div>
+        <p>Find out if this purchase fits your budget without the money stress.</p>
+        <span class="free-pill">FREE FOREVER</span>
+        <a class="card-btn" href="can-i-afford-it-free.html">START FREE CHECK →</a>
+        <div class="foot">Make smarter spending decisions in 2 minutes.</div>
+      </article>
+    </div>
+
+    <div class="deeper">
+      <div class="deeper-head">
+        <strong>⭐ GO DEEPER WITH THE FULL VERSIONS</strong>
+        <p>Unlock more insights, personalized recommendations, and a complete plan.</p>
       </div>
+      <div class="deep-grid">
+        <div class="deep-item">
+          <div class="deep-icon">💧</div>
+          <strong>Full Money Leak Check™</strong>
+          <p>See every transaction. Get exact Keep / Change / Cut decisions with custom recommendations.</p>
+          <a href="money-leak-check.html">Learn More →</a>
+        </div>
+        <div class="deep-item">
+          <div class="deep-icon">📅</div>
+          <strong>Full Paycheck-to-Monday Plan™</strong>
+          <p>Detailed payday planning and a complete plan through the days ahead.</p>
+          <a href="paycheck-reset.html">Learn More →</a>
+        </div>
+        <div class="deep-item">
+          <div class="deep-icon">🛒</div>
+          <strong>Full Purchase Check™</strong>
+          <p>Deeper tradeoff analysis and personalized insights so you can buy with confidence.</p>
+          <a href="can-i-afford-it.html">Learn More →</a>
+        </div>
+      </div>
+    </div>
 
-      <div class="tool-grid">
-        <article class="tool-card leak">
-          <div class="card-visual">
-            <div class="visual-inner">
-              <div class="visual-badge">7-day spending reset</div>
-              <div>
-                <div class="visual-title">THE MONEY <span>LEAK CHECK™</span></div>
-                <div class="visual-rule"></div>
+    <section class="system-wrap" id="system">
+      <div class="system-grid">
+        <div>
+          <div class="system-kicker">THE COMPLETE MONEY SYSTEM</div>
+          <h2>Financial Freedom<br><span>SheetWork™</span></h2>
+          <div class="system-tagline">Your money. All in one place.</div>
+          <p>Bring your income, bills, spending, savings, paychecks, budget, forecasting, and net worth together so you can see the full picture and make confident decisions every day.</p>
+          <div class="system-icons">
+            <div><span>◫</span>Income</div>
+            <div><span>▤</span>Bills</div>
+            <div><span>◔</span>Spending</div>
+            <div><span>▦</span>Budget</div>
+            <div><span>◫</span>Paychecks</div>
+            <div><span>⌁</span>Forecast</div>
+            <div><span>↗</span>Net Worth</div>
+          </div>
+        </div>
+
+        <div class="system-dashboard">
+          <div class="system-screen">
+            <div class="screen-head"><span>SheetWork™ Dashboard</span><span>Overview</span></div>
+            <div class="kpi-row">
+              <div class="kpi"><small>SAFE TO SPEND</small><strong>$47.67</strong></div>
+              <div class="kpi"><small>DAYS UNTIL PAYDAY</small><strong>6</strong></div>
+              <div class="kpi"><small>PROTECTED SAVINGS</small><strong>$286</strong></div>
+              <div class="kpi"><small>MONTHLY CASH FLOW</small><strong>$1,250</strong></div>
+            </div>
+            <div class="system-bottom">
+              <div class="chart">
+                <div class="bar b1"></div><div class="bar b2"></div><div class="bar b3"></div><div class="bar b4"></div><div class="bar b5"></div>
+              </div>
+              <div class="dash-card">
+                <h4>SPENDING BY CATEGORY</h4>
+                <div class="donut"></div>
               </div>
             </div>
           </div>
-          <div class="card-body">
-            <div class="card-label">When your money keeps disappearing</div>
-            <h3>Find the sneaky stuff.</h3>
-            <p>Review a week of spending, decide what stays, what changes, and what goes, then see how much money those choices could put back in your hands.</p>
-            <div class="benefits">
-              <div class="benefit">✓ Review real spending</div>
-              <div class="benefit">✓ Keep / Change / Cut</div>
-              <div class="benefit">✓ See potential money back</div>
-              <div class="benefit">✓ Turn savings into a goal</div>
-            </div>
-            <div class="card-action">
-              <a class="btn btn-primary" href="money-leak-check.html">Open The Money Leak Check →</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="tool-card reset">
-          <div class="card-visual">
-            <div class="visual-inner">
-              <div class="visual-badge">Paycheck survival reset</div>
-              <div>
-                <div class="visual-title">THE PAYCHECK-TO-MONDAY <span>RESET™</span></div>
-                <div class="visual-rule"></div>
-              </div>
-            </div>
-          </div>
-          <div class="card-body">
-            <div class="card-label">When payday feels gone before Monday</div>
-            <h3>See what you actually have room for.</h3>
-            <p>Put your available money, upcoming bills, and protected savings in one place, then build a realistic plan for what has to happen before you get paid again.</p>
-            <div class="benefits">
-              <div class="benefit">✓ Payday reality check</div>
-              <div class="benefit">✓ Protect bills and savings</div>
-              <div class="benefit">✓ Plan everyday spending</div>
-              <div class="benefit">✓ Know what's truly available</div>
-            </div>
-            <div class="card-action">
-              <a class="btn btn-primary" href="paycheck-reset.html">Open The Paycheck-to-Monday Reset →</a>
-            </div>
-          </div>
-        </article>
-
-        
-        <article class="tool-card afford-card">
-          <div class="card-visual">
-            <div class="visual-inner">
-              <div class="visual-badge">Shopping reality check</div>
-              <div>
-                <div class="visual-title">CAN I <span>AFFORD IT?™</span></div>
-                <div class="visual-rule"></div>
-              </div>
-            </div>
-          </div>
-          <div class="card-body">
-            <div class="card-label">When you want it, but need to know if it fits</div>
-            <h3>Check before you hit buy.</h3>
-            <p>See whether a purchase fits after bills and protected savings are handled, and exactly how much breathing room it leaves behind.</p>
-            <div class="benefits">
-              <div class="benefit">✓ Protect bills first</div>
-              <div class="benefit">✓ Keep savings untouched</div>
-              <div class="benefit">✓ See what's safe before buying</div>
-              <div class="benefit">✓ Know what remains afterward</div>
-            </div>
-            <div class="card-action">
-              <a class="btn btn-primary" href="can-i-afford-it.html">Open Can I Afford It? →</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="tool-card sheetwork-card">
-          <div class="card-visual">
-            <div class="visual-inner">
-              <div class="visual-badge">The full money system</div>
-              <div>
-                <div class="visual-title">THE FINANCIAL FREEDOM <span>SHEETWORK™</span></div>
-                <div class="visual-rule"></div>
-              </div>
-            </div>
-          </div>
-          <div class="card-body">
-            <div class="card-label">When you're ready to connect the whole picture</div>
-            <h3>Stop managing your money in pieces.</h3>
-            <p>Bring your paychecks, bills, savings, spending, goals, and forward-looking decisions into one connected system built to show you what matters next.</p>
-            <div class="benefits">
-              <div class="benefit">✓ Know what's covered</div>
-              <div class="benefit">✓ Protect savings</div>
-              <div class="benefit">✓ See what's safe to spend</div>
-              <div class="benefit">✓ Know what's coming next</div>
-            </div>
-            <div class="card-action">
-              <a class="btn btn-primary" href="sheetwork.html">Explore The SheetWork™ →</a>
-            </div>
-          </div>
-        </article>
+        </div>
       </div>
+
+      <div class="system-cta">
+        <a href="sheetwork.html">INVEST IN MY FINANCIAL FUTURE →</a>
+      </div>
+      <div class="system-meta">🔒 One-time access &nbsp; • &nbsp; Lifetime updates &nbsp; • &nbsp; Works in Google Sheets &nbsp; • &nbsp; 100% Private</div>
+    </section>
+
+    <div class="benefits" id="how">
+      <div class="benefit"><span>🎯</span><strong>Made for real life</strong><p>Simple tools and a system that fit your busy life.</p></div>
+      <div class="benefit"><span>🛡️</span><strong>Built on trust</strong><p>Your privacy is our priority. Your data is never sold, shared, or stored.</p></div>
+      <div class="benefit"><span>🌱</span><strong>Grow with confidence</strong><p>From small wins today to big goals tomorrow, we're with you every step.</p></div>
+      <div class="benefit"><span>🚩</span><strong>Clarity leads to freedom</strong><p>Understand your money. Make better choices. Build the future you deserve.</p></div>
     </div>
-  </section>
-
-
-  <section class="sheetwork" id="sheetwork">
-    <div class="shell sheetwork-grid">
-      <div class="sheet-mockup" aria-hidden="true">
-        <div class="sheet-window">
-          <div class="sheet-top">
-            <div class="sheet-logo">THE FINANCIAL FREEDOM <span>SHEETWORK™</span></div>
-            <div class="sheet-badge">YOUR FULL MONEY SYSTEM</div>
-          </div>
-          <div class="sheet-body">
-            <div class="sheet-dashboard">
-              <div class="sheet-kpi teal"><small>What's covered</small><strong>Bills + obligations</strong></div>
-              <div class="sheet-kpi"><small>What's protected</small><strong>Savings stay safe</strong></div>
-              <div class="sheet-kpi teal"><small>What's safe to spend</small><strong>Your real number</strong></div>
-              <div class="sheet-kpi"><small>What's coming next</small><strong>Plan ahead</strong></div>
-            </div>
-            <div class="sheet-chart"></div>
-          </div>
-        </div>
-        <div class="sheet-mini">
-          <strong>One place. Bigger picture.</strong>
-          <p>Your paychecks, bills, spending, savings, goals, and forecasts work together instead of living in separate lists.</p>
-        </div>
-      </div>
-
-      <div class="sheetwork-copy">
-        <div class="section-eyebrow">The money tools solve the moment. This is the system.</div>
-        <h2>Ready to stop solving your money <span>one crisis at a time?</span></h2>
-        <p class="sheetwork-lead">
-          The Money Leak Check, Paycheck-to-Monday Reset, and Can I Afford It? help you handle one money moment. <strong>The Financial Freedom SheetWork™ connects the bigger picture</strong> so you can see what is covered, what stays protected, what is actually safe to spend, and what is coming next.
-        </p>
-
-        <div class="sheet-promise">
-          <div class="promise"><strong>✓ Know what's covered</strong><span>See bills and obligations before they surprise you.</span></div>
-          <div class="promise"><strong>✓ Know what's protected</strong><span>Keep savings and sinking funds from quietly becoming spending money.</span></div>
-          <div class="promise"><strong>✓ Know what's safe</strong><span>See the money you can actually use after the important stuff is handled.</span></div>
-          <div class="promise"><strong>✓ Know what's next</strong><span>Look ahead instead of waiting for the next paycheck to tell you what happened.</span></div>
-        </div>
-
-        <div class="sheetwork-bridge">
-          <strong>These tools answer one question at a time. SheetWork helps your whole financial life answer together.</strong>
-        </div>
-
-        <div class="sheetwork-actions">
-          <a class="btn btn-gold" href="#sheetwork-benefits">Explore The Financial Freedom SheetWork™ ↓</a>
-          <a class="btn btn-secondary" href="#tools">Keep Using the Free Tools</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="sheet-details" id="sheetwork-benefits">
-    <div class="shell sheet-details-grid">
-      <div>
-        <div class="section-eyebrow">More than a budget</div>
-        <h2>Your money should work together.</h2>
-        <p>SheetWork is designed to give you the bigger picture without making you become a spreadsheet expert. Instead of checking five places and doing the math in your head, the system brings the important answers together so you can make the decision.</p>
-      </div>
-
-      <div class="sheet-benefits">
-        <div class="sheet-benefit"><div class="icon">✓</div><strong>Paycheck clarity</strong><span>See what each paycheck needs to cover and where you have room.</span></div>
-        <div class="sheet-benefit"><div class="icon">✓</div><strong>Bill visibility</strong><span>Know what's due, what's already handled, and what still needs attention.</span></div>
-        <div class="sheet-benefit"><div class="icon">✓</div><strong>Protected savings</strong><span>Separate money that technically exists from money you actually want available to spend.</span></div>
-        <div class="sheet-benefit"><div class="icon">✓</div><strong>Forward-looking decisions</strong><span>Use forecasts and upcoming obligations to make today's money decision with tomorrow in view.</span></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="how" id="how">
-    <div class="shell how-grid">
-      <div>
-        <div class="section-eyebrow" style="color:#d7aa5a">No complicated setup</div>
-        <h2>Open it. Use your numbers. Leave with a decision.</h2>
-        <p>The goal isn't to make you stare at more numbers. It's to help you understand the few numbers that matter for the decision in front of you.</p>
-      </div>
-      <div class="steps">
-        <div class="step">
-          <div class="step-num">01</div>
-          <strong>Pick the problem</strong>
-          <span>Choose the spending leak tool or the paycheck reset based on what you need today.</span>
-        </div>
-        <div class="step">
-          <div class="step-num">02</div>
-          <strong>Enter your real numbers</strong>
-          <span>The calculations update instantly while you work through the tool.</span>
-        </div>
-        <div class="step">
-          <div class="step-num">03</div>
-          <strong>Make the next move</strong>
-          <span>Use the result to decide what to cut, protect, spend, or redirect.</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="final">
-    <div class="shell">
-      <div class="final-box">
-        <div class="section-eyebrow">Start where the pressure is</div>
-        <h2>You don't need to fix everything today.</h2>
-        <p>You just need a clearer next decision. Pick the tool that matches what's happening with your money right now and start there.</p>
-        <a class="btn btn-primary" href="#tools">Choose My Tool ↑</a>
-      </div>
-    </div>
-  </section>
+  </div>
+</section>
 </main>
 
-<footer>
-  <div class="shell footer-inner">
-    <div class="footer-brand">The Financial Freedom <span>SheetWork™</span></div>
-    <div class="footer-copy">Know what’s covered. Know what’s safe. Know what’s next.</div>
+<footer id="about">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="brand">
+        <div class="logo-mark">↗</div>
+        <div class="brand-copy">
+          <strong>MONEY MADE CLEAR™</strong>
+          <small>Tools for today. A system for your future.</small>
+        </div>
+      </div>
+      <div class="footer-links">
+        <a href="#tools">TOOLS</a>
+        <a href="#system">SHEETWORK™ SYSTEM</a>
+        <a href="#how">HOW IT WORKS</a>
+        <a href="#">ABOUT</a>
+        <a href="#">HELP</a>
+      </div>
+    </div>
+    <div class="footer-small">© 2026 Money Made Clear™ &nbsp; | &nbsp; All rights reserved. &nbsp; | &nbsp; Privacy Policy &nbsp; | &nbsp; Terms of Use</div>
   </div>
 </footer>
 
