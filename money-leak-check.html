@@ -864,6 +864,39 @@ body{
   .accent-card{right:-4px}
 }
 
+
+/* Tightened cover composition: remove unused upper space */
+.premium-cover .cover-grid{
+  align-items:start !important;
+  padding-top:34px !important;
+}
+.premium-cover .cover-copy{
+  min-height:980px !important;
+  justify-content:flex-start !important;
+  padding-top:72px !important;
+}
+.premium-cover .cover-kicker{
+  margin-top:0 !important;
+}
+.premium-cover .cover-visual{
+  min-height:820px !important;
+  align-items:flex-start !important;
+  padding-top:150px !important;
+}
+.premium-cover .visual-stack{
+  padding-top:0 !important;
+}
+@media(max-width:760px){
+  .premium-cover .cover-copy{
+    min-height:auto !important;
+    padding-top:28px !important;
+  }
+  .premium-cover .cover-visual{
+    min-height:610px !important;
+    padding-top:24px !important;
+  }
+}
+
 </style>
 </head>
 <body>
