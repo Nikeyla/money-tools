@@ -154,7 +154,7 @@ h1 em{
 }
 .section-head p{margin:0;color:#5c6d79;line-height:1.65;font-size:16px}
 
-.tool-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.tool-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
 .tool-card{
   position:relative;overflow:hidden;border-radius:20px;background:#fff;
   border:1px solid #dce3e2;box-shadow:0 18px 44px rgba(21,50,74,.10);
@@ -544,9 +544,20 @@ footer{
 }
 
 
-.tool-grid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:24px!important;align-items:stretch!important}
+.tool-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:24px!important;align-items:stretch!important}
 .tool-card{min-width:0!important;width:auto!important}
 @media(max-width:900px){.tool-grid{grid-template-columns:1fr!important}}
+
+.afford-card:before{background:linear-gradient(90deg,var(--navy) 0 48%,var(--teal) 48% 78%,var(--gold) 78%)}
+.afford-card .card-visual{
+  background:
+    radial-gradient(circle at 85% 16%,rgba(208,162,82,.22),transparent 24%),
+    linear-gradient(145deg,#06365c 0%,#0b5361 62%,#147a80 100%);
+}
+.afford-card .visual-title span{color:#f1c96f}
+.afford-card .visual-rule{background:var(--gold)}
+.afford-card .card-action .btn{background:var(--teal2);border-color:var(--teal2)}
+
 </style>
 </head>
 <body>
@@ -607,8 +618,8 @@ footer{
     <div class="shell">
       <div class="section-head">
         <div class="section-eyebrow">Choose what you need today</div>
-        <h2>Start with a reset. Grow into the full system.</h2>
-        <p>Choose a focused reset for what you need today, or explore The Financial Freedom SheetWork™ when you're ready to connect the bigger picture.</p>
+        <h2>Three focused tools. One complete money system.</h2>
+        <p>Choose the tool that matches the money decision in front of you, or explore The Financial Freedom SheetWork™ when you're ready to connect the bigger picture.</p>
       </div>
 
       <div class="tool-grid">
@@ -660,6 +671,33 @@ footer{
             </div>
             <div class="card-action">
               <a class="btn btn-primary" href="paycheck-reset.html">Open The Paycheck-to-Monday Reset →</a>
+            </div>
+          </div>
+        </article>
+
+        
+        <article class="tool-card afford-card">
+          <div class="card-visual">
+            <div class="visual-inner">
+              <div class="visual-badge">Shopping reality check</div>
+              <div>
+                <div class="visual-title">CAN I <span>AFFORD IT?™</span></div>
+                <div class="visual-rule"></div>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-label">When you want it, but need to know if it fits</div>
+            <h3>Check before you hit buy.</h3>
+            <p>See whether a purchase fits after bills and protected savings are handled, and exactly how much breathing room it leaves behind.</p>
+            <div class="benefits">
+              <div class="benefit">✓ Protect bills first</div>
+              <div class="benefit">✓ Keep savings untouched</div>
+              <div class="benefit">✓ See what's safe before buying</div>
+              <div class="benefit">✓ Know what remains afterward</div>
+            </div>
+            <div class="card-action">
+              <a class="btn btn-primary" href="can-i-afford-it.html">Open Can I Afford It? →</a>
             </div>
           </div>
         </article>
@@ -719,10 +757,10 @@ footer{
       </div>
 
       <div class="sheetwork-copy">
-        <div class="section-eyebrow">The free tools are the reset. This is the system.</div>
+        <div class="section-eyebrow">The money tools solve the moment. This is the system.</div>
         <h2>Ready to stop solving your money <span>one crisis at a time?</span></h2>
         <p class="sheetwork-lead">
-          The Money Leak Check and Paycheck-to-Monday Reset help you handle one money moment. <strong>The Financial Freedom SheetWork™ connects the bigger picture</strong> so you can see what is covered, what stays protected, what is actually safe to spend, and what is coming next.
+          The Money Leak Check, Paycheck-to-Monday Reset, and Can I Afford It? help you handle one money moment. <strong>The Financial Freedom SheetWork™ connects the bigger picture</strong> so you can see what is covered, what stays protected, what is actually safe to spend, and what is coming next.
         </p>
 
         <div class="sheet-promise">

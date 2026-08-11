@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Can I Afford It?™</title>
+<style>
+:root{
+  --navy:#06365c;--navy2:#041f35;--teal:#218c91;--teal2:#147a80;
+  --gold:#d0a252;--gold2:#b78332;--cream:#fbfaf7;--soft:#eef7f7;
+  --ink:#15324a;--muted:#687b87;--line:#d7e5e5;--white:#fff;
+  --green:#2f7d5b;--orange:#c9783d;--red:#b94e55;
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{
+  margin:0;background:
+  radial-gradient(circle at 10% 5%,rgba(33,140,145,.10),transparent 25%),
+  radial-gradient(circle at 90% 18%,rgba(208,162,82,.10),transparent 24%),#e9efef;
+  color:var(--ink);font-family:Arial,Helvetica,sans-serif
+}
+button,input{font:inherit}
+
+/* Four-product navigation */
+.site-nav{
+  position:sticky;top:0;z-index:180;min-height:48px;
+  background:#06365c!important;color:#fff!important;
+  border-bottom:1px solid rgba(208,162,82,.38)!important;
+  box-shadow:0 2px 10px rgba(6,54,92,.14);
+}
+.site-nav-inner{
+  width:min(100%,1240px);margin:0 auto;padding:7px 14px;
+  display:flex;align-items:center;gap:10px;min-height:48px;
+}
+.site-nav a{text-decoration:none;white-space:nowrap}
+.site-nav .nav-home{color:#d3a451!important;font-size:11px;font-weight:900}
+.site-nav .nav-tools{display:flex;align-items:center;gap:6px;min-width:0}
+.site-nav .nav-link{
+  color:#dceef0!important;background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.12);
+  font-size:9.5px;font-weight:800;padding:6px 9px;border-radius:999px;
+}
+.site-nav .nav-link:hover{background:#d7eef0!important;color:#06365c!important}
+.nav-sheet-link{
+  color:#082c4b!important;background:#d3a451!important;border:1px solid #c49442!important;
+  font-size:9.5px!important;font-weight:900!important;padding:6px 10px!important;border-radius:999px!important;
+}
+.nav-actions{display:flex;align-items:center;gap:5px;margin-left:auto}
+.nav-action{
+  color:#06365c!important;background:#fff!important;border:1px solid #8db9bd!important;
+  min-height:29px;padding:0 9px;border-radius:999px;font:800 9px Arial,Helvetica,sans-serif;cursor:pointer;
+}
+.nav-action.save{color:#082c4b!important;background:#d3a451!important;border-color:#c49442!important}
+.nav-save-note{color:#b7cbd3!important;font-size:8px;white-space:nowrap}
+.toolbar{
+  position:static!important;min-height:0!important;height:0!important;padding:0!important;margin:0!important;
+  border:0!important;box-shadow:none!important;background:transparent!important;overflow:visible!important;
+}
+.toolbar>*{display:none!important}
+@media(max-width:980px){
+  .site-nav-inner{flex-wrap:wrap}
+  .nav-actions{width:100%;order:4;margin-left:0;overflow-x:auto}
+  .nav-save-note{display:none}
+}
+@media(max-width:700px){
+  .site-nav .nav-tools{overflow-x:auto;scrollbar-width:none;max-width:100%}
+  .site-nav .nav-tools::-webkit-scrollbar{display:none}
+}
+
+.book{padding:24px 12px 54px}
+.page{
+  width:min(100%,900px);margin:0 auto 28px;background:var(--cream);
+  box-shadow:0 12px 32px rgba(6,54,92,.13);position:relative;overflow:hidden;border-radius:2px;
+}
+.page-head{
+  min-height:68px;padding:0 30px;display:flex;align-items:center;justify-content:space-between;
+  background:#fff;border-top:4px solid var(--navy);border-bottom:1px solid #dce8e8;
+}
+.brand{font-size:19px;font-weight:900;letter-spacing:.3px;color:var(--navy)}
+.badge{background:var(--navy);color:#fff;font-size:11px;font-weight:900;padding:8px 12px;border-radius:999px}
+.footer{
+  min-height:62px;background:var(--navy);color:#fff;border-top:3px solid var(--gold);
+  display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;
+}
+.content{padding:34px 34px 42px}
+.step-title{font-family:Georgia,serif;color:var(--navy);font-size:36px;line-height:1.05;margin:0 0 9px}
+.lead{font-size:14px;color:var(--muted);line-height:1.55;margin:0 0 25px}
+
+/* cover */
+.cover{
+  min-height:790px;color:#fff;background:
+    radial-gradient(circle at 84% 13%,rgba(208,162,82,.20),transparent 25%),
+    radial-gradient(circle at 8% 85%,rgba(33,140,145,.28),transparent 30%),
+    linear-gradient(140deg,var(--navy2),var(--navy) 60%,#0d6268);
+}
+.cover-grid{min-height:790px;display:grid;grid-template-columns:1.02fr .98fr;gap:28px;padding:54px;align-items:center}
+.cover-kicker{color:var(--gold);font-size:12px;font-weight:900;letter-spacing:1.7px;text-transform:uppercase}
+.cover h1{font-family:Georgia,serif;font-size:70px;line-height:.92;margin:14px 0 20px;letter-spacing:-2px}
+.cover h1 span{color:#75cfd1}
+.cover-rule{width:100px;height:4px;background:var(--gold);border-radius:99px;margin-bottom:20px}
+.cover p{color:#d7e5e9;font-size:17px;line-height:1.65;margin:0;max-width:530px}
+.cover-points{display:grid;gap:10px;margin-top:26px}
+.cover-point{
+  display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.13);border-radius:10px;padding:12px 14px;
+}
+.cover-point b{color:var(--gold);font-family:Georgia,serif;font-size:20px}
+.cover-point span{font-size:11px;font-weight:800;color:#dce8eb}
+.shop-stack{position:relative;min-height:560px}
+.shopping-card{
+  position:absolute;right:16px;top:52px;width:330px;background:#fff;border-radius:18px;
+  box-shadow:0 28px 60px rgba(0,0,0,.27);overflow:hidden;transform:rotate(2deg)
+}
+.shopping-head{
+  padding:18px;background:#f8fbfa;border-bottom:1px solid #e1e9e8;
+  display:flex;justify-content:space-between;align-items:center;color:var(--navy);
+  font-size:10px;font-weight:900
+}
+.shopping-head span:last-child{background:#dff1f1;color:var(--teal2);padding:6px 8px;border-radius:999px}
+.shopping-body{padding:18px}
+.item-box{background:#f7f9f8;border:1px solid #e2e9e8;border-radius:10px;padding:15px}
+.item-box small{display:block;color:#7b8b92;font-size:9px;font-weight:900;text-transform:uppercase}
+.item-box strong{display:block;color:var(--navy);font-size:24px;margin-top:5px}
+.shopping-math{margin-top:14px}
+.math-row{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid #edf2f1;font-size:11px;color:#536b78}
+.math-row strong{color:var(--navy)}
+.math-result{margin-top:14px;padding:15px;border-radius:10px;background:linear-gradient(135deg,var(--navy),#0d6268);text-align:center}
+.math-result span{display:block;color:#d6e7e9;font-size:9px;font-weight:900}
+.math-result strong{display:block;color:var(--gold);font-family:Georgia,serif;font-size:35px;margin:4px 0}
+.bag-card{
+  position:absolute;left:8px;bottom:45px;width:195px;background:#fff;border-radius:14px;
+  padding:18px;box-shadow:0 20px 45px rgba(0,0,0,.20);transform:rotate(-4deg)
+}
+.bag-icon{font-size:36px}.bag-card strong{display:block;color:var(--navy);font-size:13px;margin:7px 0 4px}
+.bag-card span{color:#667983;font-size:10px;line-height:1.45}
+
+/* calculator */
+.check-grid{display:grid;grid-template-columns:1fr .92fr;gap:20px}
+.form-card,.decision-card{
+  background:#fff;border:1px solid var(--line);border-radius:13px;padding:22px;
+}
+.form-card h3,.decision-card h3{margin:0 0 15px;color:var(--navy);font-size:15px}
+.field{margin-bottom:16px}
+.field label{display:block;font-size:11px;font-weight:900;color:#48606e;margin-bottom:7px}
+.money-wrap{position:relative}.money-wrap span{position:absolute;left:13px;top:50%;transform:translateY(-50%);font-weight:900;color:var(--teal2)}
+.money-wrap input{
+  width:100%;height:48px;padding:0 12px 0 31px;border:1px solid #c9dcdd;border-radius:8px;
+  background:#fff;color:var(--navy);font-size:18px;font-weight:900;outline:none
+}
+.money-wrap input:focus{border-color:var(--teal);box-shadow:0 0 0 2px rgba(33,140,145,.12)}
+.hint{font-size:9.5px;color:#829098;margin-top:5px;line-height:1.4}
+.calc-stack{display:grid;gap:9px}
+.calc-line{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  background:#f6f9f8;border:1px solid #e2eaea;border-radius:8px;padding:12px
+}
+.calc-line span{font-size:10px;color:#657983}.calc-line strong{font-size:15px;color:var(--navy)}
+.calc-line.final{background:#e7f3f3;border-color:#c8e3e3}.calc-line.final strong{color:var(--teal2);font-size:20px}
+.decision-box{margin-top:16px;border-radius:12px;padding:18px;text-align:center;background:var(--navy);color:#fff}
+.decision-label{font-size:9px;font-weight:900;letter-spacing:1px;color:#bfd3d9}
+.decision-title{font-family:Georgia,serif;font-size:28px;margin:6px 0}
+.decision-note{font-size:11px;color:#d4e2e6;line-height:1.5}
+.confidence{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
+.conf{padding:10px;border-radius:8px;text-align:center;border:1px solid #e0e8e7;background:#fff}
+.conf b{display:block;font-size:10px;color:var(--navy)}.conf small{font-size:8px;color:#809097}
+.result-callout{margin-top:18px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px}
+.result-callout strong{display:block;color:var(--navy);font-size:13px;margin-bottom:6px}
+.result-callout span{font-size:11px;line-height:1.5;color:#627781}
+
+/* result page */
+.result-hero{text-align:center;padding:10px 0 25px}
+.result-hero .eyebrow{color:var(--teal2);font-size:11px;font-weight:900;letter-spacing:1.3px;text-transform:uppercase}
+.result-hero h2{font-family:Georgia,serif;font-size:40px;color:var(--navy);margin:8px 0 10px}
+.result-hero p{max-width:650px;margin:0 auto;color:#667983;font-size:13px;line-height:1.55}
+.result-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.result-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px;text-align:center}
+.result-card small{display:block;color:#71838c;font-size:9px;font-weight:900;text-transform:uppercase}
+.result-card strong{display:block;color:var(--navy);font-size:24px;margin:8px 0 4px}
+.result-card span{font-size:9.5px;color:#829098}
+.move-card{margin-top:18px;background:var(--navy);color:#fff;border-radius:13px;padding:22px}
+.move-card h3{margin:0 0 8px;color:var(--gold);font-size:15px}
+.move-card p{margin:0;color:#d4e2e6;font-size:12px;line-height:1.55}
+
+/* SheetWork promo */
+.promo{
+  min-height:820px;background:
+  radial-gradient(circle at 88% 10%,rgba(208,162,82,.13),transparent 25%),
+  linear-gradient(180deg,#fbfaf7,#f1f7f6)
+}
+.promo-inner{min-height:820px;padding:68px 60px;display:flex;flex-direction:column;justify-content:center;text-align:center}
+.promo-eyebrow{color:var(--teal2);font-size:11px;font-weight:900;letter-spacing:1.4px;text-transform:uppercase}
+.promo h2{font-family:Georgia,serif;color:var(--navy);font-size:45px;line-height:1.05;margin:10px auto 15px;max-width:760px}
+.promo h2 span{color:var(--teal2)}
+.promo-lead{max-width:710px;margin:0 auto 26px;color:#607480;font-size:15px;line-height:1.65}
+.promo-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:760px;margin:0 auto 28px;text-align:left}
+.promo-card{background:#fff;border:1px solid var(--line);border-radius:11px;padding:17px;display:flex;gap:12px}
+.promo-icon{flex:0 0 34px;width:34px;height:34px;border-radius:50%;background:#dff1f1;color:var(--teal2);display:flex;align-items:center;justify-content:center;font-weight:900}
+.promo-card strong{display:block;color:var(--navy);font-size:13px;margin-bottom:4px}
+.promo-card small{display:block;color:#71828b;font-size:10px;line-height:1.45}
+.promo-cta{align-self:center;display:inline-flex;align-items:center;justify-content:center;min-height:50px;padding:0 24px;border-radius:8px;background:var(--navy);color:#fff;text-decoration:none;font-weight:900;font-size:13px;border-bottom:3px solid var(--gold)}
+.promo-note{margin-top:14px;color:#799099;font-size:10.5px;font-weight:800}
+.status{width:min(100%,900px);margin:-14px auto 26px;background:#fff;border:1px solid var(--line);border-radius:8px;padding:10px 14px;text-align:center;font-size:12px;color:#526976}
+@media(max-width:760px){
+  .cover-grid,.check-grid{grid-template-columns:1fr}
+  .cover h1{font-size:50px}.shop-stack{min-height:520px}
+  .shopping-card{right:0}.bag-card{left:0}
+  .result-grid,.promo-grid{grid-template-columns:1fr}
+  .content{padding:28px 20px 38px}.promo-inner{padding:50px 24px}
+}
+@media print{
+  body{background:#fff}.site-nav,.status{display:none!important}.book{padding:0}.page{box-shadow:none;margin:0;page-break-after:always;width:100%}
+}
+</style>
+</head>
+<body>
+
+<nav class="site-nav" aria-label="Money tools navigation">
+  <div class="site-nav-inner">
+    <a class="nav-home" href="index.html">← Money Tools Home</a>
+    <div class="nav-tools">
+      <a class="nav-link nav-switch" href="money-leak-check.html">Money Leak Check</a><a class="nav-link nav-switch" href="paycheck-reset.html">Paycheck-to-Monday</a>
+    </div>
+    <a class="nav-sheet-link" href="sheetwork.html">Explore SheetWork™</a>
+    <div class="nav-actions">
+      <button class="nav-action save" id="saveBtn">Save My Progress</button>
+      <button class="nav-action" id="resetBtn">Start Over</button>
+      <button class="nav-action" id="printBtn">Print / Save PDF</button>
+      <span class="nav-save-note">Saved on this device</span>
+    </div>
+  </div>
+</nav>
+
+<div class="book">
+
+<section class="page cover">
+  <div class="cover-grid">
+    <div>
+      <div class="cover-kicker">A smarter shopping gut-check</div>
+      <h1>CAN I<br><span>AFFORD IT?™</span></h1>
+      <div class="cover-rule"></div>
+      <p>Before you hit buy, see whether the purchase fits your real money situation without stealing from bills, protected savings, or the rest of your week.</p>
+      <div class="cover-points">
+        <div class="cover-point"><b>01</b><span>Start with what is actually available</span></div>
+        <div class="cover-point"><b>02</b><span>Protect bills and savings first</span></div>
+        <div class="cover-point"><b>03</b><span>See what the purchase leaves behind</span></div>
+      </div>
+    </div>
+    <div class="shop-stack" aria-hidden="true">
+      <div class="shopping-card">
+        <div class="shopping-head"><span>SHOPPING REALITY CHECK</span><span>LIVE</span></div>
+        <div class="shopping-body">
+          <div class="item-box"><small>Purchase you're considering</small><strong>$120</strong></div>
+          <div class="shopping-math">
+            <div class="math-row"><span>Safe before purchase</span><strong>$350</strong></div>
+            <div class="math-row"><span>Purchase</span><strong>− $120</strong></div>
+          </div>
+          <div class="math-result"><span>SAFE AFTER PURCHASE</span><strong>$230</strong><small>without touching protected money</small></div>
+        </div>
+      </div>
+      <div class="bag-card"><div class="bag-icon">🛍️</div><strong>Shopping should fit the plan.</strong><span>Not force the plan to recover afterward.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="page">
+  <div class="page-head"><div class="brand">CAN I AFFORD IT?™</div><div class="badge">PAGE 2 OF 4</div></div>
+  <div class="content">
+    <h2 class="step-title">Step 1: Check the purchase against real life.</h2>
+    <p class="lead">Use the money you have available right now, then protect anything that already has a job before deciding whether the purchase fits.</p>
+    <div class="check-grid">
+      <div class="form-card">
+        <h3>Your numbers</h3>
+        <div class="field"><label>Money available right now</label><div class="money-wrap"><span>$</span><input id="available" inputmode="decimal" placeholder="0.00"></div><div class="hint">Checking/cash you could use today.</div></div>
+        <div class="field"><label>Bills due before your next income</label><div class="money-wrap"><span>$</span><input id="bills" inputmode="decimal" placeholder="0.00"></div><div class="hint">Only bills that need to be covered before more money comes in.</div></div>
+        <div class="field"><label>Protected savings</label><div class="money-wrap"><span>$</span><input id="protected" inputmode="decimal" placeholder="0.00"></div><div class="hint">Money you're choosing not to spend.</div></div>
+        <div class="field"><label>Purchase you're considering</label><div class="money-wrap"><span>$</span><input id="purchase" inputmode="decimal" placeholder="0.00"></div><div class="hint">Include tax/shipping if you know it.</div></div>
+      </div>
+
+      <div class="decision-card">
+        <h3>Your shopping reality check</h3>
+        <div class="calc-stack">
+          <div class="calc-line"><span>Money available</span><strong id="outAvailable">$0.00</strong></div>
+          <div class="calc-line"><span>Already spoken for</span><strong id="outSpoken">$0.00</strong></div>
+          <div class="calc-line final"><span>Safe before purchase</span><strong id="outSafe">$0.00</strong></div>
+          <div class="calc-line"><span>Purchase</span><strong id="outPurchase">$0.00</strong></div>
+          <div class="calc-line final"><span>Safe after purchase</span><strong id="outAfter">$0.00</strong></div>
+        </div>
+        <div class="decision-box">
+          <div class="decision-label">CAN I AFFORD IT?</div>
+          <div class="decision-title" id="decisionTitle">Enter your numbers.</div>
+          <div class="decision-note" id="decisionNote">We'll show you what the purchase leaves behind.</div>
+        </div>
+      </div>
+    </div>
+    <div class="result-callout"><strong>The goal isn't to talk you out of buying things.</strong><span>It's to make sure the purchase fits after the important money is protected, so you can enjoy what you buy without wondering what it messed up.</span></div>
+  </div>
+  <div class="footer">Buy with clarity, not regret.</div>
+</section>
+
+<div class="status" id="status">Enter your numbers. Your decision updates instantly.</div>
+
+<section class="page">
+  <div class="page-head"><div class="brand">CAN I AFFORD IT?™</div><div class="badge">PAGE 3 OF 4</div></div>
+  <div class="content">
+    <div class="result-hero">
+      <div class="eyebrow">Your purchase in context</div>
+      <h2 id="resultHeadline">See what buying it changes.</h2>
+      <p id="resultSummary">Once you enter your numbers, this page will show how much breathing room the purchase uses and what remains afterward.</p>
+    </div>
+    <div class="result-grid">
+      <div class="result-card"><small>Safe before purchase</small><strong id="rSafe">$0.00</strong><span>After bills + protected savings</span></div>
+      <div class="result-card"><small>Purchase uses</small><strong id="rPercent">0%</strong><span>of your safe-to-use money</span></div>
+      <div class="result-card"><small>Left after purchase</small><strong id="rAfter">$0.00</strong><span>Your remaining breathing room</span></div>
+    </div>
+    <div class="move-card">
+      <h3 id="moveTitle">Your next move</h3>
+      <p id="moveText">Enter your numbers on page 2 to get a simple recommendation.</p>
+    </div>
+  </div>
+  <div class="footer">A purchase can be affordable and still deserve a second look.</div>
+</section>
+
+<section class="page promo">
+  <div class="promo-inner">
+    <div class="promo-eyebrow">ONE PURCHASE IS EASIER TO JUDGE WHEN YOU CAN SEE THE WHOLE PICTURE</div>
+    <h2>Want to know what's safe to spend <span>before you even start shopping?</span></h2>
+    <p class="promo-lead">The Financial Freedom SheetWork™ connects your bills, paychecks, savings, spending, and what is coming next so everyday money decisions don't have to start with guesswork.</p>
+    <div class="promo-grid">
+      <div class="promo-card"><span class="promo-icon">✓</span><div><strong>Know what's covered</strong><small>See the bills and obligations your money needs to handle.</small></div></div>
+      <div class="promo-card"><span class="promo-icon">✓</span><div><strong>Know what's protected</strong><small>Keep savings separate from everyday spending.</small></div></div>
+      <div class="promo-card"><span class="promo-icon">✓</span><div><strong>Know what's safe to spend</strong><small>See what is actually available after the important stuff.</small></div></div>
+      <div class="promo-card"><span class="promo-icon">✓</span><div><strong>Know what's coming next</strong><small>Use forecasts and income guidance to plan ahead.</small></div></div>
+    </div>
+    <a class="promo-cta" href="sheetwork.html">Explore The Financial Freedom SheetWork™ →</a>
+    <div class="promo-note">Your money. Your information. Your decisions. All in one place.</div>
+  </div>
+</section>
+
+</div>
+
+<script>
+const ids=["available","bills","protected","purchase"];
+function num(v){
+  const x=parseFloat(String(v??"").replace(/[$,\s]/g,""));
+  return Number.isFinite(x)?x:0;
+}
+function money(v){
+  const sign=v<0?"-":"";
+  return sign+"$"+Math.abs(v).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2});
+}
+function values(){
+  const available=num(document.getElementById("available").value);
+  const bills=num(document.getElementById("bills").value);
+  const protectedMoney=num(document.getElementById("protected").value);
+  const purchase=num(document.getElementById("purchase").value);
+  const spoken=bills+protectedMoney;
+  const safe=Math.max(0,available-spoken);
+  const after=safe-purchase;
+  const pct=safe>0?(purchase/safe)*100:0;
+  return {available,bills,protectedMoney,purchase,spoken,safe,after,pct};
+}
+function recalc(){
+  const v=values();
+  document.getElementById("outAvailable").textContent=money(v.available);
+  document.getElementById("outSpoken").textContent=money(v.spoken);
+  document.getElementById("outSafe").textContent=money(v.safe);
+  document.getElementById("outPurchase").textContent=money(v.purchase);
+  document.getElementById("outAfter").textContent=money(v.after);
+  document.getElementById("rSafe").textContent=money(v.safe);
+  document.getElementById("rPercent").textContent=(v.safe>0?Math.round(v.pct):0)+"%";
+  document.getElementById("rAfter").textContent=money(v.after);
+
+  let title="Enter your numbers.", note="We'll show you what the purchase leaves behind.";
+  let headline="See what buying it changes.", summary="Once you enter your numbers, this page will show how much breathing room the purchase uses and what remains afterward.";
+  let moveTitle="Your next move", moveText="Enter your numbers on page 2 to get a simple recommendation.";
+  const hasAny=ids.some(id=>document.getElementById(id).value.trim()!=="");
+
+  if(hasAny){
+    if(v.purchase<=0){
+      title="Add the purchase price."; note="Then you'll see whether it fits.";
+      headline="Almost there."; summary="Add the purchase amount to finish your check.";
+    } else if(v.safe<=0 || v.after<0){
+      title="Not right now.";
+      note="This purchase reaches into money that is already spoken for.";
+      headline="This purchase doesn't fit the safe-to-spend number.";
+      summary="Bills and protected savings need the available money first.";
+      moveTitle="Give it a pause.";
+      moveText="Wait for more income, lower the purchase amount, or deliberately change another part of the plan before buying.";
+    } else if(v.pct>=70){
+      title="You can, but it's a big bite.";
+      note="It fits without touching protected money, but uses most of your breathing room.";
+      headline="Affordable, but expensive for this moment.";
+      summary="The purchase fits, but it would use "+Math.round(v.pct)+"% of the money that is actually safe to use.";
+      moveTitle="Sleep on it before checkout.";
+      moveText="If you'd still choose it knowing only "+money(v.after)+" remains afterward, the purchase may be worth it. If that number feels tight, wait.";
+    } else if(v.pct>=40){
+      title="Yes, with a second look.";
+      note="It fits, but it uses a meaningful share of your available breathing room.";
+      headline="It fits, but notice what it uses.";
+      summary="You would keep "+money(v.after)+" after the purchase.";
+      moveTitle="Check the tradeoff.";
+      moveText="Ask whether you'd rather have the item or keep the "+money(v.purchase)+" available for something else this week.";
+    } else {
+      title="Yes. It fits.";
+      note="Bills and protected savings stay intact, with breathing room left afterward.";
+      headline="This purchase fits your current plan.";
+      summary="After buying it, you'd still have "+money(v.after)+" of safe-to-use money left.";
+      moveTitle="Buy it with clarity.";
+      moveText="The purchase fits the numbers you entered without reaching into bills or protected savings.";
+    }
+  }
+  document.getElementById("decisionTitle").textContent=title;
+  document.getElementById("decisionNote").textContent=note;
+  document.getElementById("resultHeadline").textContent=headline;
+  document.getElementById("resultSummary").textContent=summary;
+  document.getElementById("moveTitle").textContent=moveTitle;
+  document.getElementById("moveText").textContent=moveText;
+}
+ids.forEach(id=>document.getElementById(id).addEventListener("input",recalc));
+document.getElementById("saveBtn").addEventListener("click",()=>{
+  const data={};ids.forEach(id=>data[id]=document.getElementById(id).value);
+  localStorage.setItem("canIAffordItData",JSON.stringify(data));
+  document.getElementById("status").textContent="Progress saved on this device.";
+});
+document.getElementById("resetBtn").addEventListener("click",()=>{
+  if(confirm("Start over and clear this check?")){
+    ids.forEach(id=>document.getElementById(id).value="");
+    localStorage.removeItem("canIAffordItData");recalc();
+    document.getElementById("status").textContent="Started over. Enter your numbers when you're ready.";
+  }
+});
+document.getElementById("printBtn").addEventListener("click",()=>window.print());
+try{
+  const saved=JSON.parse(localStorage.getItem("canIAffordItData")||"{}");
+  ids.forEach(id=>{if(saved[id]!=null)document.getElementById(id).value=saved[id]});
+}catch(e){}
+recalc();
+</script>
+</body>
+</html>
