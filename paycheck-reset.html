@@ -231,9 +231,79 @@ button,input{font:inherit}
   }
 }
 
+
+/* Money Tools navigation */
+.site-nav{
+  position:sticky; top:0; z-index:140; height:48px;
+  display:flex; align-items:center;
+  box-shadow:0 2px 10px rgba(0,0,0,.14);
+}
+.site-nav-inner{
+  width:min(100%,1180px); margin:0 auto; padding:0 18px;
+  display:flex; align-items:center; justify-content:space-between;
+  gap:22px; min-width:0;
+}
+.site-nav a{
+  text-decoration:none; white-space:nowrap;
+  transition:opacity .18s ease, color .18s ease, background .18s ease;
+}
+.site-nav .nav-home{
+  font-size:12px; font-weight:900; letter-spacing:.2px;
+}
+.site-nav .nav-tools{
+  display:flex; align-items:center; gap:12px; min-width:0;
+  overflow-x:auto; scrollbar-width:none;
+}
+.site-nav .nav-tools::-webkit-scrollbar{display:none}
+.site-nav .nav-link{
+  font-size:11px; font-weight:800; padding:7px 9px; border-radius:999px;
+}
+.site-nav .nav-divider{opacity:.32;font-size:11px}
+
+.site-nav-leak{
+  background:#0b0b0b; color:#fff;
+  border-bottom:1px solid rgba(215,170,90,.38);
+}
+.site-nav-leak .nav-home{color:#d7aa5a}
+.site-nav-leak .nav-link{color:#dedbd4}
+.site-nav-leak .nav-link.active{color:#111;background:#d7aa5a}
+.site-nav-leak a:hover{opacity:.82}
+
+.site-nav-reset{
+  background:#06365c; color:#fff;
+  border-bottom:1px solid rgba(201,151,71,.42);
+}
+.site-nav-reset .nav-home{color:#c99747}
+.site-nav-reset .nav-link{color:#dceef0}
+.site-nav-reset .nav-link.active{color:#06365c;background:#d7eef0}
+.site-nav-reset a:hover{opacity:.84}
+
+/* Existing action bar remains visible directly below navigation */
+.toolbar{top:48px !important}
+
+@media(max-width:700px){
+  .site-nav-inner{padding:0 12px;gap:14px}
+  .site-nav .nav-home{font-size:11px}
+  .site-nav .nav-tools{gap:7px}
+  .site-nav .nav-link{font-size:10px;padding:6px 8px}
+  .site-nav .nav-divider{display:none}
+}
+
 </style>
 </head>
 <body>
+
+<nav class="site-nav site-nav-reset" aria-label="Money tools navigation">
+  <div class="site-nav-inner">
+    <a class="nav-home" href="index.html">← Money Tools Home</a>
+    <div class="nav-tools">
+      <a class="nav-link" href="money-leak-check.html">Money Leak Check</a>
+      <span class="nav-divider">|</span>
+      <a class="nav-link active" href="paycheck-reset.html" aria-current="page">Paycheck-to-Monday Reset</a>
+    </div>
+  </div>
+</nav>
+
 
 <div class="toolbar">
   <button class="primary" id="saveBtn">Save My Progress</button>
