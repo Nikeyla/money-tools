@@ -24,12 +24,259 @@ section.content{padding:76px 0}.section-head{text-align:center;max-width:760px;m
 .cta{padding:80px 0;text-align:center}.cta-box{max-width:830px;margin:0 auto;background:var(--navy2);color:#fff;border-radius:20px;padding:50px 34px;position:relative;overflow:hidden}.cta-box:before{content:"";position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,var(--teal),var(--gold))}.cta h2{font-family:Georgia,serif;font-size:42px;margin:0 0 12px}.cta p{color:#cbd9df;line-height:1.65;max-width:650px;margin:0 auto 25px}.test-note{font-size:11px;color:#9fb2ba;margin-top:14px}
 footer{background:#111;color:#fff;border-top:3px solid var(--gold)}.footer-inner{min-height:84px;display:flex;align-items:center;justify-content:space-between;gap:20px}.footer-brand{font-family:Georgia,serif}.footer-brand span{color:var(--gold)}.footer-copy{font-size:11px;color:#aaa}
 @media(max-width:900px){.hero-grid,.bridge-grid{grid-template-columns:1fr}.grid4{grid-template-columns:1fr 1fr}}@media(max-width:620px){.grid4,.compare{grid-template-columns:1fr}.hero{padding-top:55px}.nav-inner{align-items:flex-start;padding:10px 0;flex-direction:column}.nav-links{justify-content:flex-start}}
+
+/* Demand-validated pain-point section */
+.pain{
+  padding:78px 0;
+  background:#fff;
+  border-top:1px solid #e5eceb;
+  border-bottom:1px solid #e5eceb;
+}
+.pain-grid{
+  display:grid;
+  grid-template-columns:.9fr 1.1fr;
+  gap:48px;
+  align-items:start;
+}
+.pain-copy h2{
+  font-family:Georgia,serif;
+  color:var(--navy);
+  font-size:42px;
+  line-height:1.05;
+  margin:9px 0 15px;
+}
+.pain-copy p{
+  color:#61727c;
+  line-height:1.7;
+  margin:0 0 18px;
+}
+.pain-callout{
+  margin-top:22px;
+  padding:18px 20px;
+  background:#eef7f7;
+  border-left:4px solid var(--teal);
+  border-radius:0 10px 10px 0;
+  color:#355263;
+  font-size:13px;
+  line-height:1.6;
+}
+.pain-cards{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+}
+.pain-card{
+  background:#f9fbfa;
+  border:1px solid #dbe7e6;
+  border-radius:13px;
+  padding:21px;
+  min-height:190px;
+}
+.pain-icon{
+  width:42px;height:42px;
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  background:#dff1f1;
+  color:var(--teal2);
+  font-size:19px;
+  margin-bottom:14px;
+}
+.pain-card.gold .pain-icon{
+  background:#f3e6ca;
+  color:#9a6f27;
+}
+.pain-card strong{
+  display:block;
+  color:var(--navy);
+  font-size:15px;
+  margin-bottom:8px;
+}
+.pain-card span{
+  display:block;
+  color:#667983;
+  font-size:12px;
+  line-height:1.55;
+}
+.simple{
+  padding:78px 0;
+  background:#eef7f7;
+}
+.simple-head{
+  text-align:center;
+  max-width:780px;
+  margin:0 auto 36px;
+}
+.simple-head h2{
+  font-family:Georgia,serif;
+  color:var(--navy);
+  font-size:42px;
+  line-height:1.05;
+  margin:9px 0 13px;
+}
+.simple-head p{
+  color:#60737d;
+  line-height:1.65;
+}
+.simple-flow{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
+}
+.flow-step{
+  background:#fff;
+  border:1px solid #d8e6e6;
+  border-radius:14px;
+  padding:24px;
+  position:relative;
+  min-height:205px;
+}
+.flow-num{
+  font-family:Georgia,serif;
+  color:var(--gold);
+  font-size:36px;
+  line-height:1;
+}
+.flow-step strong{
+  display:block;
+  color:var(--navy);
+  margin:14px 0 8px;
+  font-size:15px;
+}
+.flow-step span{
+  color:#667983;
+  font-size:12px;
+  line-height:1.55;
+}
+.flow-arrow{
+  position:absolute;
+  right:-12px;
+  top:50%;
+  transform:translateY(-50%);
+  width:24px;height:24px;
+  border-radius:50%;
+  background:var(--navy);
+  color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;
+  z-index:2;
+}
+.no-bank{
+  margin-top:24px;
+  background:var(--navy2);
+  color:#fff;
+  border-radius:14px;
+  padding:24px 26px;
+  display:flex;
+  align-items:flex-start;
+  gap:18px;
+}
+.no-bank .shield{
+  width:48px;height:48px;
+  flex:0 0 48px;
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  background:#d0a252;
+  color:#082c4b;
+  font-size:22px;
+}
+.no-bank strong{
+  display:block;
+  font-size:16px;
+  margin-bottom:6px;
+}
+.no-bank span{
+  color:#cbd9df;
+  font-size:12px;
+  line-height:1.6;
+}
+@media(max-width:900px){
+  .pain-grid{grid-template-columns:1fr}
+  .simple-flow{grid-template-columns:1fr}
+  .flow-arrow{display:none}
+}
+@media(max-width:620px){
+  .pain-cards{grid-template-columns:1fr}
+  .pain-copy h2,.simple-head h2{font-size:36px}
+  .no-bank{flex-direction:column}
+}
+
 </style>
 </head>
 <body>
 <nav><div class="shell nav-inner"><a class="nav-home" href="index.html">← Money Tools Home</a><div class="nav-links"><a href="money-leak-check.html">Money Leak Check</a><a href="paycheck-reset.html">Paycheck-to-Monday Reset</a><a class="active" href="sheetwork.html">The SheetWork™</a></div></div></nav>
-<header class="hero"><div class="shell hero-grid"><div><div class="eyebrow">The full money system</div><h1>The Financial Freedom <span>SheetWork™</span></h1><p>Know what’s covered. Know what’s protected. Know what’s safe to spend. Know what’s coming next. SheetWork connects the numbers you already have so you can stop doing the financial math in your head every payday.</p><div class="hero-buttons"><a class="btn btn-gold" href="#access">See Tester Access ↓</a><a class="btn btn-outline" href="#inside">See What It Does</a></div></div><div class="mock" aria-hidden="true"><div class="mock-head"><strong>THE FINANCIAL FREEDOM <span>SHEETWORK™</span></strong></div><div class="mock-body"><div class="kpis"><div class="kpi teal"><small>What's covered</small><strong>Bills + obligations</strong></div><div class="kpi"><small>What's protected</small><strong>Savings stays safe</strong></div><div class="kpi teal"><small>What's safe to spend</small><strong>Your real number</strong></div><div class="kpi"><small>What's coming next</small><strong>Plan ahead</strong></div></div><div class="chart"></div></div></div></div></header>
-<section class="content" id="inside"><div class="shell"><div class="section-head"><div class="eyebrow">One connected view</div><h2>Your money should work together.</h2><p>The free tools help with one money moment. SheetWork is designed for the bigger picture, where paychecks, bills, savings, spending, and what comes next all affect the same decision.</p></div><div class="grid4"><div class="feature"><div class="icon">✓</div><strong>Paycheck clarity</strong><span>See what each paycheck needs to cover and where you actually have room.</span></div><div class="feature"><div class="icon">✓</div><strong>Bill visibility</strong><span>Know what is due, what is already handled, and what still needs your attention.</span></div><div class="feature"><div class="icon">✓</div><strong>Protected savings</strong><span>Keep savings and sinking funds from quietly turning into everyday spending money.</span></div><div class="feature"><div class="icon">✓</div><strong>Forward-looking decisions</strong><span>Use upcoming obligations and forecasts to make today’s decision with tomorrow in view.</span></div></div></div></section>
+<header class="hero"><div class="shell hero-grid"><div><div class="eyebrow">The full money system</div><h1>The Financial Freedom <span>SheetWork™</span></h1><p>Know what’s covered. Know what’s protected. Know what’s safe to spend. Know what’s coming next. SheetWork gives you the bigger picture while keeping you in control of your financial information. Set it up once, bring in your posted statement activity, and let the system turn those numbers into practical money insights.</p><div class="hero-buttons"><a class="btn btn-gold" href="#access">See Tester Access ↓</a><a class="btn btn-outline" href="#inside">See What It Does</a></div></div><div class="mock" aria-hidden="true"><div class="mock-head"><strong>THE FINANCIAL FREEDOM <span>SHEETWORK™</span></strong></div><div class="mock-body"><div class="kpis"><div class="kpi teal"><small>What's covered</small><strong>Bills + obligations</strong></div><div class="kpi"><small>What's protected</small><strong>Savings stays safe</strong></div><div class="kpi teal"><small>What's safe to spend</small><strong>Your real number</strong></div><div class="kpi"><small>What's coming next</small><strong>Plan ahead</strong></div></div><div class="chart"></div></div></div></div></header>
+
+<section class="pain">
+  <div class="shell pain-grid">
+    <div class="pain-copy">
+      <div class="eyebrow">Clarity without giving up control</div>
+      <h2>Your money. Your information. Your decisions. All in one place.</h2>
+      <p>SheetWork gives you a clear picture of your money without requiring a bank connection. Set it up once, bring in your current statement activity, and let the system turn your numbers into insights you can actually use.</p>
+      <p>You stay in control of the information you bring in, while SheetWork handles the connected calculations, forecasting, and decision support that help you see the bigger picture.</p>
+      <div class="pain-callout"><strong>Designed for real life:</strong> spend less time maintaining your money system and more time understanding what your money is telling you.</div>
+    </div>
+    <div class="pain-cards">
+      <div class="pain-card gold">
+        <div class="pain-icon">🔒</div>
+        <strong>Your financial information stays in your hands</strong>
+        <span>No bank connection is required. You choose the statement activity you bring into your SheetWork, giving you a clear and transparent way to keep your information current.</span>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">↻</div>
+        <strong>Statements keep your picture current</strong>
+        <span>Bring in your posted statement activity when you're ready to update. Your SheetWork uses that information to refresh the connected picture of your money.</span>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">✓</div>
+        <strong>Simple ongoing upkeep</strong>
+        <span>Complete the main setup once. After that, your regular routine is primarily bringing in current statement activity, reviewing anything that needs your attention, and checking your insights.</span>
+      </div>
+      <div class="pain-card gold">
+        <div class="pain-icon">💡</div>
+        <strong>Built to help you make decisions</strong>
+        <span>See bill coverage, protected savings, Safe to Spend, spending patterns, your 90-day outlook, and income guidance without having to piece the math together yourself.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="simple">
+  <div class="shell">
+    <div class="simple-head">
+      <div class="eyebrow">A simple rhythm you can keep up with</div>
+      <h2>Set it up once. Bring in your statements. See the bigger picture.</h2>
+      <p>SheetWork is designed so the main setup happens once. From there, you bring in what changed and let the connected system refresh the insights that help you decide what comes next.</p>
+    </div>
+    <div class="simple-flow">
+      <div class="flow-step">
+        <div class="flow-num">01</div>
+        <strong>Set it up once</strong>
+        <span>Add your accounts, bills, income schedule, budget, savings goals, and starter category rules. Come back to setup when something in your financial life changes.</span>
+        <div class="flow-arrow">→</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">02</div>
+        <strong>Bring in your statements</strong>
+        <span>Import your current posted activity. SheetWork uses your saved setup and category rules to help organize the information and surface anything that needs your review.</span>
+        <div class="flow-arrow">→</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">03</div>
+        <strong>See the bigger picture</strong>
+        <span>Your connected views help you understand balances, budget progress, Safe to Spend, savings, spending patterns, your 90-day outlook, and income opportunities from the same system.</span>
+      </div>
+    </div>
+    <div class="no-bank">
+      <div class="shield">✓</div>
+      <div>
+        <strong>Stay in control of how your financial information comes in.</strong>
+        <span>SheetWork does not require a live bank connection. You decide when to bring in your statement activity, giving you a transparent routine and control over the financial information used by your system.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="content" id="inside"><div class="shell"><div class="section-head"><div class="eyebrow">One connected view</div><h2>Your money should work together.</h2><p>The free tools help with one money moment. SheetWork is designed for the bigger picture. Once your setup and statement activity are in place, paychecks, bills, savings, spending, forecasts, and what comes next all feed the same decision.</p></div><div class="grid4"><div class="feature"><div class="icon">✓</div><strong>Paycheck clarity</strong><span>See what each paycheck needs to cover and where you actually have room.</span></div><div class="feature"><div class="icon">✓</div><strong>Bill visibility</strong><span>Know what is due, what is already handled, and what still needs your attention.</span></div><div class="feature"><div class="icon">✓</div><strong>Protected savings</strong><span>Keep savings and sinking funds from quietly turning into everyday spending money.</span></div><div class="feature"><div class="icon">✓</div><strong>Forward-looking decisions</strong><span>Use upcoming obligations and forecasts to make today’s decision with tomorrow in view.</span></div></div></div></section>
 <section class="bridge"><div class="shell bridge-grid"><div><div class="eyebrow">From reset to system</div><h2>The tools solve a moment. SheetWork connects the pattern.</h2><p>Use Money Leak Check when spending feels slippery. Use Paycheck-to-Monday when payday needs a plan. Use SheetWork when you want those decisions connected to your full financial picture.</p></div><div class="compare"><div class="compare-card"><strong>Focused Money Tools</strong><span>Fast, specific resets for the problem in front of you today.</span></div><div class="compare-card full"><strong>The Financial Freedom SheetWork™</strong><span>Your ongoing system for seeing what is covered, protected, safe, and coming next.</span></div></div></div></section>
 <section class="cta" id="access"><div class="shell"><div class="cta-box"><div class="eyebrow">Tester phase</div><h2>Ready to see the full SheetWork?</h2><p>During testing, access can go directly to the SheetWork copy link. After testing is complete, this is where the purchase step will live before customers receive access to make their own copy.</p><a class="btn btn-gold" href="https://docs.google.com/spreadsheets/d/1Iq1e3Cv0gED3gBMWjzBjfL-f5beV30QZLcue1aptrHI/copy" id="sheetAccessBtn" target="_blank" rel="noopener">Open SheetWork Tester Access</a><div class="test-note">Tester access opens a fresh copy so each tester can use the SheetWork without changing the original.</div></div></div></section>
 <footer><div class="shell footer-inner"><div class="footer-brand">The Financial Freedom <span>SheetWork™</span></div><div class="footer-copy">Know what’s covered. Know what’s safe. Know what’s next.</div></div></footer>
