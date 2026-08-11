@@ -897,6 +897,42 @@ body{
   }
 }
 
+
+/* Final cover spacing: content-sized instead of fixed page height */
+.premium-cover{
+  min-height:0 !important;
+}
+.premium-cover .cover-grid{
+  min-height:0 !important;
+  padding-top:34px !important;
+  padding-bottom:32px !important;
+}
+.premium-cover .cover-copy{
+  min-height:0 !important;
+  padding-top:42px !important;
+  padding-bottom:0 !important;
+}
+.premium-cover .cover-visual{
+  min-height:0 !important;
+  padding-top:105px !important;
+  align-self:start !important;
+}
+.premium-cover .cover-bottom{
+  position:static !important;
+  margin-top:30px !important;
+}
+@media(max-width:760px){
+  .premium-cover .cover-grid{
+    padding-bottom:28px !important;
+  }
+  .premium-cover .cover-copy{
+    padding-top:20px !important;
+  }
+  .premium-cover .cover-visual{
+    padding-top:20px !important;
+  }
+}
+
 </style>
 </head>
 <body>
