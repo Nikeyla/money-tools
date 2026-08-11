@@ -342,6 +342,70 @@ button,input{font:inherit}
   .privacy{display:none !important}
 }
 
+
+/* Integrated actions: no second sticky bar */
+.toolbar{
+  position:static !important;
+  min-height:0 !important;
+  height:0 !important;
+  padding:0 !important;
+  margin:0 !important;
+  border:0 !important;
+  box-shadow:none !important;
+  background:transparent !important;
+  overflow:visible !important;
+}
+.toolbar > *{display:none !important}
+
+.nav-actions{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  margin-left:auto;
+}
+.nav-action{
+  appearance:none;
+  border:1px solid rgba(255,255,255,.25);
+  background:transparent;
+  color:#eaf4f5;
+  min-height:30px;
+  padding:0 10px;
+  border-radius:999px;
+  font:800 10px Arial,Helvetica,sans-serif;
+  cursor:pointer;
+  white-space:nowrap;
+}
+.nav-action.save{
+  color:#082c4b;
+  background:#d3a451;
+  border-color:#d3a451;
+}
+.nav-action:hover{opacity:.86}
+.nav-save-note{
+  color:#a9c3cb;
+  font-size:9px;
+  white-space:nowrap;
+}
+@media(max-width:850px){
+  .site-nav{height:auto;min-height:48px}
+  .site-nav-inner{flex-wrap:wrap;padding-top:7px;padding-bottom:7px}
+  .nav-actions{width:100%;order:3;justify-content:flex-start;overflow-x:auto}
+  .nav-save-note{display:none}
+}
+
+
+/* Navigation shows only destinations: Home + the other tool */
+.site-nav .nav-switch{
+  color:#06365c !important;
+  background:#d7eef0 !important;
+  border:1px solid #b9dcdf !important;
+  padding:7px 12px !important;
+}
+.site-nav .nav-switch:hover{
+  background:#c8e7e9 !important;
+  opacity:1 !important;
+}
+
 </style>
 </head>
 <body>
@@ -351,11 +415,10 @@ button,input{font:inherit}
   <div class="site-nav-inner">
     <a class="nav-home" href="index.html">← Money Tools Home</a>
     <div class="nav-tools">
-      <a class="nav-link " href="money-leak-check.html">Money Leak Check</a>
-      <span class="nav-divider">|</span>
-      <a class="nav-link active" href="paycheck-reset.html" aria-current="page">Paycheck-to-Monday Reset</a>
+      <a class="nav-link nav-switch" href="money-leak-check.html">Switch to Money Leak Check →</a>
     </div>
-  </div>
+  <div class="nav-actions"><button class="nav-action save" id="saveBtn">Save My Progress</button><button class="nav-action" id="resetBtn">Start Over</button><button class="nav-action" id="printBtn">Print / Save PDF</button><span class="nav-save-note">Saved on this device</span></div>
+</div>
 </nav>
 <div class="toolbar">
   <button class="primary" id="saveBtn">Save My Progress</button>
