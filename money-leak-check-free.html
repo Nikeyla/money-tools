@@ -132,7 +132,17 @@ a{text-decoration:none}
   .thead,.trow{grid-template-columns:1.3fr .7fr .5fr .5fr .5fr}
   .upgrade-box .bullets{grid-template-columns:1fr}
 }
-:root{--accent:#0f7a4d;--soft:#edf8f1;--softline:#cfe6d7}</style></head><body>
+:root{--accent:#0f7a4d;--soft:#edf8f1;--softline:#cfe6d7}
+.change-plan{
+  display:grid;grid-template-columns:1fr auto minmax(84px,120px);gap:8px;align-items:center;
+  padding:7px 12px 10px;border-top:1px dashed #d9e6e7;background:#fbfdfd;
+  font-size:9px;color:var(--muted)
+}
+.change-plan strong{color:var(--navy);font-size:9px}
+.change-plan input{height:32px;width:100%;border:1px solid #c8d9dc;border-radius:7px;padding:0 8px;color:var(--ink);background:#fff}
+@media(max-width:560px){.change-plan{grid-template-columns:1fr minmax(80px,110px)}.change-plan span{grid-column:1/-1}}
+
+</style></head><body>
 <nav class="site-nav"><a class="home" href="index.html">← Free Money Tools</a><a href="money-leak-check-free.html">Money Leak Check</a><a href="paycheck-monday-free.html">Paycheck-to-Monday</a><a href="can-i-afford-it-free.html">Can I Afford It?</a></nav>
 <div class="book">
 <section class="page">
@@ -153,12 +163,12 @@ a{text-decoration:none}
   <div class="head"><div class="brand">💧 MONEY LEAK CHECK™ · FREE VERSION</div><div class="badge">PAGE 2 OF 4</div></div>
   <div class="content">
     <div class="stepbar"><span class="stepnum">1</span><strong>Your Last 7 Days in Categories</strong></div>
-    <p class="lead">Estimate what you spent in each category. Then choose Keep, Change, or Cut.</p>
+    <p class="lead">Estimate what you spent in each category. Choose Keep, Change, or Cut. If you choose Change, enter what you want to spend instead.</p>
     <div class="table">
       <div class="thead"><div>CATEGORY</div><div>SPENT</div><div>KEEP</div><div>CHANGE</div><div>CUT</div></div>
       <div id="leakRows"></div>
     </div>
-    <div class="summary-strip"><div><small>YOUR POTENTIAL MONEY BACK</small><br><span style="font-size:9px;color:#6b7d88">7-DAY ESTIMATE</span></div><strong id="leakPotential">$0.00</strong></div>
+    <div class="summary-strip"><div><small>YOUR POTENTIAL MONEY BACK</small><br><span style="font-size:9px;color:#6b7d88">7-DAY ESTIMATE</span></div><strong id="leakPotential">—</strong></div>
   </div>
   <div class="navrow"><button class="back" onclick="scrollTo({top:0,behavior:'smooth'})">← BACK</button><button class="next" onclick="document.getElementById('p3').scrollIntoView({behavior:'smooth'})">CALCULATE MY RESULTS →</button></div>
 </section>
@@ -166,11 +176,11 @@ a{text-decoration:none}
 <section class="page" id="p3">
   <div class="head"><div class="brand">💧 MONEY LEAK CHECK™ · FREE VERSION</div><div class="badge">PAGE 3 OF 4</div></div>
   <div class="content">
-    <div class="result-hero"><div class="kicker">YOUR RESULTS</div><h2>You Could Get <span id="leakHeadline">$0.00</span> Back</h2><p class="lead">That's if you make the changes you chose.</p></div>
+    <div class="result-hero"><div class="kicker">YOUR RESULTS</div><h2>You Could Get <span id="leakHeadline">—</span> Back</h2><p class="lead">That's if you make the changes you chose.</p></div>
     <div class="grid3">
-      <div class="result-card"><div class="icon">✓</div><small>KEEP</small><strong id="keepTotal">$0</strong><span class="small-note">Spending that still feels worth it</span></div>
-      <div class="result-card"><div class="icon">↻</div><small>CHANGE</small><strong id="changeTotal">$0</strong><span class="small-note">Small changes that make a big impact</span></div>
-      <div class="result-card"><div class="icon">✕</div><small>CUT</small><strong id="cutTotal">$0</strong><span class="small-note">Money you'd rather keep</span></div>
+      <div class="result-card"><div class="icon">✓</div><small>KEEP</small><strong id="keepTotal">—</strong><span class="small-note">Spending that still feels worth it</span></div>
+      <div class="result-card"><div class="icon">↻</div><small>CHANGE</small><strong id="changeTotal">—</strong><span class="small-note">Money saved by lowering spending</span></div>
+      <div class="result-card"><div class="icon">✕</div><small>CUT</small><strong id="cutTotal">—</strong><span class="small-note">Money you'd rather keep</span></div>
     </div>
     <div class="card" style="margin-top:14px"><strong style="display:block;margin-bottom:10px;color:var(--navy)">Where will you send this money?</strong>
       <div class="grid4"><button class="secondary">Emergency Fund</button><button class="secondary">Pay Down Debt</button><button class="secondary">Save for Goals</button><button class="secondary">Other</button></div>
@@ -195,15 +205,36 @@ a{text-decoration:none}
 </div><script>
 const leakCats=["Dining Out","Shopping","Subscriptions","Entertainment","Transportation","Other"];
 const leakRows=document.getElementById('leakRows');
-let leakState=leakCats.map((c,i)=>({cat:c,amt:[78.45,124.30,48.90,36.75,67.25,39.10][i],decision:["keep","change","keep","change","keep","change"][i]}));
+let leakState=leakCats.map(c=>({cat:c,amt:0,decision:null,target:0}));
 function renderLeak(){
-  leakRows.innerHTML=leakState.map((r,i)=>`<div class="trow"><div>${r.cat}</div><div><input style="height:30px;padding:0 6px" type="number" min="0" step=".01" value="${r.amt}" oninput="leakState[${i}].amt=+this.value||0;calcLeak()"></div>
-  ${["keep","change","cut"].map(d=>`<div><div class="choice ${r.decision===d?'on':''}" onclick="leakState[${i}].decision='${d}';renderLeak();calcLeak()"></div></div>`).join('')}</div>`).join('');
+  leakRows.innerHTML=leakState.map((r,i)=>`
+    <div class="trow">
+      <div>${r.cat}</div>
+      <div><input style="height:30px;padding:0 6px;width:100%" type="number" min="0" step=".01" value="${r.amt || ''}" oninput="leakState[${i}].amt=+this.value||0;calcLeak()"></div>
+      ${["keep","change","cut"].map(d=>`<div><div class="choice ${r.decision===d?'on':''}" onclick="setLeakDecision(${i},'${d}')"></div></div>`).join('')}
+    </div>
+    ${r.decision==="change"?`<div class="change-plan"><span>CHANGE means spend less, not cut it completely.</span><strong>CHANGE TO $</strong><input aria-label="${r.cat} new spending amount" type="number" min="0" step=".01" value="${r.target || ''}" oninput="leakState[${i}].target=+this.value||0;calcLeak()"></div>`:""}
+  `).join('');
+}
+function setLeakDecision(i,d){
+  leakState[i].decision=d;
+  if(d!=="change") leakState[i].target=0;
+  renderLeak();calcLeak();
 }
 function m(n){return '$'+n.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})}
 function calcLeak(){
-  let k=0,c=0,x=0;leakState.forEach(r=>{if(r.decision==='keep')k+=r.amt;else if(r.decision==='change')c+=r.amt*.5;else x+=r.amt});
-  let p=c+x; leakPotential.textContent=m(p); leakHeadline.textContent=m(p); keepTotal.textContent=m(k); changeTotal.textContent=m(c); cutTotal.textContent=m(x);
+  let k=0,c=0,x=0;
+  leakState.forEach(r=>{
+    if(r.decision==='keep')k+=r.amt;
+    else if(r.decision==='change')c+=Math.max(0,r.amt-Math.min(r.amt,Math.max(0,r.target||0)));
+    else if(r.decision==='cut')x+=r.amt;
+  });
+  let p=c+x;
+  leakPotential.textContent=m(p);
+  leakHeadline.textContent=m(p);
+  keepTotal.textContent=m(k);
+  changeTotal.textContent=m(c);
+  cutTotal.textContent=m(x);
 }
-renderLeak();calcLeak();
+renderLeak();
 </script></body></html>

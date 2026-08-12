@@ -150,14 +150,14 @@ a{text-decoration:none}
   <div class="head"><div class="brand">🛒 CAN I AFFORD IT?™ · FREE VERSION</div><div class="badge">PAGE 2 OF 4</div></div>
   <div class="content">
     <div class="stepbar"><span class="stepnum">1</span><strong>Your Financial Snapshot</strong></div>
-    <div class="card"><div class="field"><label>What are you thinking about buying?</label><input id="caItem" placeholder="Shoes, phone, vacation..." value="New Shoes"></div></div>
+    <div class="card"><div class="field"><label>What are you thinking about buying?</label><input id="caItem" placeholder="Shoes, phone, vacation..."></div></div>
     <div class="grid2">
-      <div class="card field"><label>Total Price</label><input id="caPrice" type="number" value="150"></div>
+      <div class="card field"><label>Total Price</label><input id="caPrice" type="number"></div>
       <div class="card field"><label>Purchase Type</label><select id="caType"><option>One-time</option><option>Recurring</option></select></div>
-      <div class="card field"><label>Money You Have Now</label><input id="caCash" type="number" value="1250"></div>
-      <div class="card field"><label>Bills & Expenses Due</label><input id="caBills" type="number" value="1180"></div>
-      <div class="card field"><label>Protected Savings</label><input id="caSave" type="number" value="300"></div>
-      <div class="card field"><label>Upcoming Income</label><input id="caIncome" type="number" value="2000"></div>
+      <div class="card field"><label>Money You Have Now</label><input id="caCash" type="number"></div>
+      <div class="card field"><label>Bills & Expenses Due</label><input id="caBills" type="number"></div>
+      <div class="card field"><label>Protected Savings</label><input id="caSave" type="number"></div>
+      <div class="card field"><label>Upcoming Income</label><input id="caIncome" type="number"></div>
       <div class="card field"><label>Upcoming Income Date</label><input id="caDate" type="date"></div>
     </div>
   </div>
@@ -203,5 +203,5 @@ function calcCA(){
  else if(later>=0){caHeadline.textContent='Wait for the income.';caTip.textContent='It fits after the upcoming income, but not comfortably before it arrives.'}
  else{caHeadline.textContent='Not yet.';caTip.textContent='Even after the upcoming income, this purchase would leave you '+m(Math.abs(later))+' short.'}
 }
-document.querySelectorAll('#ca2 input,#ca2 select').forEach(e=>e.addEventListener('input',calcCA));calcCA();
+document.querySelectorAll('#ca2 input,#ca2 select').forEach(e=>e.addEventListener('input',calcCA));
 </script></body></html>

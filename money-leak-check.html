@@ -1264,6 +1264,20 @@ body{
   white-space:nowrap !important;
 }
 
+
+/* Accurate CHANGE math: user chooses the lower amount they want to spend instead. */
+.decision-stack{display:grid;gap:5px}
+.change-target-wrap{
+  display:none;grid-template-columns:auto minmax(52px,1fr);gap:5px;align-items:center;
+  font-size:9px;font-weight:900;color:var(--gold2)
+}
+.change-target-wrap.show{display:grid}
+.change-target-wrap input{
+  width:100%;height:26px;border:1px solid #d8c7a8;background:#fff;color:#111;
+  border-radius:4px;padding:0 6px;outline:none;font-size:11px
+}
+.change-target-wrap input:focus{border-color:var(--gold2);box-shadow:0 0 0 1px var(--gold2)}
+
 </style>
 </head>
 <body>
@@ -1326,32 +1340,32 @@ body{
           </div>
           <div class="money-card-body">
             <div class="spend-row">
-              <div><span class="merchant">Takeout</span><small>Convenience</small></div>
-              <strong>$42</strong>
+              <div><span class="merchant">Takeout</span><small>Choose a lower target</small></div>
+              <strong>—</strong>
               <span class="pill change-pill">CHANGE</span>
             </div>
             <div class="spend-row">
               <div><span class="merchant">Streaming</span><small>Subscription</small></div>
-              <strong>$18</strong>
+              <strong>—</strong>
               <span class="pill cut-pill">CUT</span>
             </div>
             <div class="spend-row">
               <div><span class="merchant">Coffee Run</span><small>Small purchase</small></div>
-              <strong>$14</strong>
+              <strong>—</strong>
               <span class="pill keep-pill">KEEP</span>
             </div>
             <div class="potential-box">
               <span>POTENTIAL MONEY BACK</span>
-              <strong>$60</strong>
-              <small>from just this review</small>
+              <strong>—</strong>
+              <small>Calculated from your choices</small>
             </div>
           </div>
         </div>
 
         <div class="goal-card">
           <div class="goal-label">WHAT COULD THAT BECOME?</div>
-          <strong>$60/week</strong>
-          <span>≈ $3,120/year</span>
+          <strong>Your weekly amount</strong>
+          <span>Your yearly impact</span>
           <div class="goal-line"><i></i></div>
           <small>Redirect it toward a goal you actually care about.</small>
         </div>
@@ -1406,7 +1420,7 @@ body{
   <div class="footer">♡ &nbsp; Little changes. Big freedom.</div>
 </section>
 
-<div class="status" id="status">Enter transactions and choose KEEP, CHANGE, or CUT. Your results update instantly.</div>
+<div class="status" id="status">Enter transactions and choose KEEP, CHANGE, or CUT. For CHANGE items, enter what you want to spend instead.</div>
 
 <section class="page native-page">
   <div class="page-head">
@@ -1534,7 +1548,7 @@ body{
 const config = {
   subs:{title:"Subscriptions I forgot about",desc:"Streaming, apps, memberships, etc.",rows:5},
   delivery:{title:"Delivery / Takeout / Convenience",desc:"Food delivery, instant delivery, convenience stores, etc.",rows:4},
-  small:{title:"Little Purchases Under $25",desc:"Small purchases that don’t fit another category.",rows:5},
+  small:{title:"Little Purchases",desc:"Small purchases that don’t fit another category.",rows:5},
   fees:{title:"Fees / Interest / Avoidable Charges",desc:"Bank fees, late fees, overdraft, interest, ATM fees, etc.",rows:3},
   impulse:{title:'Impulse / “Why did I buy that?”',desc:"Random buys, things you don’t even remember.",rows:4}
 };
@@ -1548,12 +1562,18 @@ function buildCategory(key,cfg){
       <div class="entry-row">
         <input id="${key}_desc_${i}" aria-label="${cfg.title} transaction ${i}">
         <input id="${key}_amt_${i}" class="amount" inputmode="decimal" aria-label="${cfg.title} amount ${i}">
-        <select id="${key}_decision_${i}" aria-label="${cfg.title} decision ${i}">
-          <option value=""></option>
-          <option value="KEEP">KEEP</option>
-          <option value="CHANGE">CHANGE</option>
-          <option value="CUT">CUT</option>
-        </select>
+        <div class="decision-stack">
+          <select id="${key}_decision_${i}" aria-label="${cfg.title} decision ${i}">
+            <option value=""></option>
+            <option value="KEEP">KEEP</option>
+            <option value="CHANGE">CHANGE</option>
+            <option value="CUT">CUT</option>
+          </select>
+          <label class="change-target-wrap" id="${key}_change_wrap_${i}">
+            <span>CHANGE TO $</span>
+            <input id="${key}_change_${i}" class="amount change-target" inputmode="decimal" aria-label="${cfg.title} new spend amount ${i}" placeholder="">
+          </label>
+        </div>
       </div>`;
   }
   return `
@@ -1568,7 +1588,7 @@ function buildCategory(key,cfg){
       </div>
       <div class="results">
         <div class="result-box"><div class="result-label">Category Total</div><div class="result-value empty" id="${key}_total"></div></div>
-        <div class="result-box"><div class="result-label">Change / Cut Potential</div><div class="result-value empty" id="${key}_potential"></div></div>
+        <div class="result-box"><div class="result-label">Money Back Potential</div><div class="result-value empty" id="${key}_potential"></div></div>
       </div>
     </div>`;
 }
@@ -1602,10 +1622,21 @@ function recalc(){
       if(raw!==""){any=true;catAny=true}
       total+=amt;
 
+      const changeWrap=document.getElementById(`${key}_change_wrap_${i}`);
+      const changeEl=document.getElementById(`${key}_change_${i}`);
+      changeWrap.classList.toggle("show",decision==="CHANGE");
+
       if(decision==="KEEP")keeping+=amt;
-      if(decision==="CHANGE"||decision==="CUT"){
+      if(decision==="CUT"){
         catPotential+=amt;
         potential+=amt;
+      }
+      if(decision==="CHANGE"){
+        const targetRaw=changeEl.value.trim();
+        const target=targetRaw===""?amt:num(targetRaw);
+        const reduction=Math.max(0,amt-Math.min(amt,target));
+        catPotential+=reduction;
+        potential+=reduction;
       }
     }
 
@@ -1634,7 +1665,7 @@ function recalc(){
 
   document.getElementById("status").textContent=any
     ? `Reviewed ${money(reviewed)} • Keeping ${money(keeping)} • Potential Money Back ${money(potential)}`
-    : "Enter transactions and choose KEEP, CHANGE, or CUT. Your results update instantly.";
+    : "Enter transactions and choose KEEP, CHANGE, or CUT. For CHANGE items, enter what you want to spend instead.";
 }
 
 function saveProgress(show=true){

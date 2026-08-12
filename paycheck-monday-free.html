@@ -150,14 +150,13 @@ a{text-decoration:none}
   <div class="head"><div class="brand">📅 PAYCHECK-TO-MONDAY RESET™ · FREE VERSION</div><div class="badge">PAGE 2 OF 4</div></div>
   <div class="content">
     <div class="stepbar"><span class="stepnum">1</span><strong>Tell Us About Your Situation</strong></div>
-    <div class="card"><strong style="display:block;margin-bottom:12px;color:var(--navy)">Your Money</strong><div class="grid3">
-      <div class="field"><label>Money You Have Now</label><input id="pmCash" type="number" value="1250"></div>
-      <div class="field"><label>Next Paycheck (Amount)</label><input id="pmIncome" type="number" value="2000"></div>
-      <div class="field"><label>Next Paycheck (Date)</label><input id="pmDate" type="date"></div>
+    <div class="card"><strong style="display:block;margin-bottom:12px;color:var(--navy)">Your Money</strong><div class="grid2">
+      <div class="field"><label>Money You Have Now</label><input id="pmCash" type="number"></div>
+      <div class="field"><label>Next Paycheck Date</label><input id="pmDate" type="date"><div class="small-note">The next paycheck is not counted as spendable until it actually arrives.</div></div>
     </div></div>
     <div class="card"><strong style="display:block;margin-bottom:12px;color:var(--navy)">What You Need to Cover</strong><div class="grid2">
-      <div class="field"><label>Bills & Expenses Due</label><input id="pmBills" type="number" value="1180"></div>
-      <div class="field"><label>Protected Savings</label><input id="pmSave" type="number" value="300"></div>
+      <div class="field"><label>Bills & Expenses Due</label><input id="pmBills" type="number"></div>
+      <div class="field"><label>Protected Savings</label><input id="pmSave" type="number"></div>
     </div></div>
     <div class="tip">🛡️ Protected savings stays off-limits while this quick reset calculates what is available for everyday spending.</div>
   </div>
@@ -167,12 +166,12 @@ a{text-decoration:none}
 <section class="page" id="pm3">
   <div class="head"><div class="brand">📅 PAYCHECK-TO-MONDAY RESET™ · FREE VERSION</div><div class="badge">PAGE 3 OF 4</div></div>
   <div class="content">
-    <div class="result-hero"><div class="kicker">HERE'S YOUR PLAN</div><h2>You Have <span id="pmSafe">$0.00</span> Safe to Spend</h2><p class="lead" id="pmWhen">Until your next payday.</p></div>
+    <div class="result-hero"><div class="kicker">HERE'S YOUR PLAN</div><h2>You Have <span id="pmSafe">—</span> Safe to Spend</h2><p class="lead" id="pmWhen">Until your next payday.</p></div>
     <div class="grid4">
-      <div class="result-card"><div class="icon">💵</div><small>MONEY UNTIL PAYDAY</small><strong id="pmRoom">$0</strong></div>
-      <div class="result-card"><div class="icon">📅</div><small>DAYS UNTIL PAYDAY</small><strong id="pmDays">0</strong></div>
-      <div class="result-card"><div class="icon">🛡️</div><small>PROTECTED SAVINGS</small><strong id="pmProtected">$0</strong></div>
-      <div class="result-card"><div class="icon">🐷</div><small>SAFE TO SPEND / DAY</small><strong id="pmDaily">$0</strong></div>
+      <div class="result-card"><div class="icon">💵</div><small>MONEY UNTIL PAYDAY</small><strong id="pmRoom">—</strong></div>
+      <div class="result-card"><div class="icon">📅</div><small>DAYS UNTIL PAYDAY</small><strong id="pmDays">—</strong></div>
+      <div class="result-card"><div class="icon">🛡️</div><small>PROTECTED SAVINGS</small><strong id="pmProtected">—</strong></div>
+      <div class="result-card"><div class="icon">🐷</div><small>SAFE TO SPEND / DAY</small><strong id="pmDaily">—</strong></div>
     </div>
     <div class="tip" id="pmTip">You're close. A little planning now can help you avoid stress later.</div>
   </div>
@@ -198,7 +197,7 @@ function calcPM(){
  let days=0;if(pmDate.value){let d=new Date(pmDate.value+'T00:00:00'),today=new Date();today.setHours(0,0,0,0);days=Math.max(0,Math.ceil((d-today)/86400000))}
  pmSafe.textContent=m(Math.max(0,room));pmRoom.textContent=m(Math.max(0,room));pmProtected.textContent=m(save);pmDays.textContent=days;pmDaily.textContent=m(days?Math.max(0,room)/days:0);
  pmWhen.textContent=pmDate.value?'Until '+new Date(pmDate.value+'T00:00:00').toLocaleDateString(undefined,{month:'long',day:'numeric'})+'.':'Until your next payday.';
- pmTip.textContent=room>=0?'You have a workable window. Keep everyday spending near your daily target.':'Your bills and protected savings are higher than the money you have now.';
+ pmTip.textContent=room>=0?'You have a workable window. Your next paycheck is not counted until it actually arrives. Keep everyday spending near your daily target.':'Your bills and protected savings are higher than the money you have now. Your next paycheck is not counted as spendable yet.';
 }
-document.querySelectorAll('#pm2 input').forEach(e=>e.addEventListener('input',calcPM));calcPM();
+document.querySelectorAll('#pm2 input').forEach(e=>e.addEventListener('input',calcPM));
 </script></body></html>

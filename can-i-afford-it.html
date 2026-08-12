@@ -18,7 +18,7 @@ body{
   radial-gradient(circle at 90% 18%,rgba(208,162,82,.10),transparent 24%),#e9efef;
   color:var(--ink);font-family:Arial,Helvetica,sans-serif
 }
-button,input{font:inherit}
+button,input,select{font:inherit}
 
 /* Four-product navigation */
 .site-nav{
@@ -1315,6 +1315,14 @@ button,input{font:inherit}
   .ps-light-copy h3{font-size:25px}
 }
 
+
+.recurring-frequency-field{display:none}
+.recurring-frequency-field.show{display:block}
+.recurring-frequency-field select{
+  width:100%;height:44px;border:1px solid #c9dcdd;border-radius:9px;background:#fff;
+  color:var(--ink);padding:0 10px;outline:none
+}
+
 </style>
 </head>
 <body>
@@ -1354,12 +1362,12 @@ button,input{font:inherit}
       <div class="shopping-card">
         <div class="shopping-head"><span>SHOPPING REALITY CHECK</span><span>LIVE</span></div>
         <div class="shopping-body">
-          <div class="item-box"><small>Purchase you're considering</small><strong>$120</strong></div>
+          <div class="item-box"><small>Purchase you're considering</small><strong>—</strong></div>
           <div class="shopping-math">
-            <div class="math-row"><span>Safe before purchase</span><strong>$350</strong></div>
-            <div class="math-row"><span>Purchase</span><strong>− $120</strong></div>
+            <div class="math-row"><span>Safe before purchase</span><strong>—</strong></div>
+            <div class="math-row"><span>Purchase</span><strong>—</strong></div>
           </div>
-          <div class="math-result"><span>SAFE AFTER PURCHASE</span><strong>$230</strong><small>without touching protected money</small></div>
+          <div class="math-result"><span>SAFE AFTER PURCHASE</span><strong>—</strong><small>without touching protected money</small></div>
         </div>
       </div>
       <div class="bag-card"><div class="bag-icon">🛍️</div><strong>Shopping should fit the plan.</strong><span>Not force the plan to recover afterward.</span></div>
@@ -1382,7 +1390,7 @@ button,input{font:inherit}
 
         <div class="field">
           <label>Purchase price</label>
-          <div class="money-wrap"><span>$</span><input id="purchase" inputmode="decimal" placeholder="0.00"></div>
+          <div class="money-wrap"><span>$</span><input id="purchase" inputmode="decimal" placeholder=""></div>
           <div class="hint">Use the full checkout price if you know it.</div>
         </div>
 
@@ -1401,15 +1409,27 @@ button,input{font:inherit}
           <div class="hint" id="purchaseTypeHint">One-time purchases affect this money window once.</div>
         </div>
 
+        <div class="field recurring-frequency-field" id="recurringFrequencyField">
+          <label>How often will this charge repeat?</label>
+          <select id="recurringFrequency">
+            <option value="monthly">Monthly</option>
+            <option value="weekly">Weekly</option>
+            <option value="biweekly">Every 2 weeks</option>
+            <option value="quarterly">Every 3 months</option>
+            <option value="yearly">Yearly</option>
+          </select>
+          <div class="hint">This lets the tool calculate the ongoing yearly impact instead of treating every recurring purchase as monthly.</div>
+        </div>
+
         <div class="field">
           <label>Money available right now</label>
-          <div class="money-wrap"><span>$</span><input id="currentMoney" inputmode="decimal" placeholder="0.00"></div>
+          <div class="money-wrap"><span>$</span><input id="currentMoney" inputmode="decimal" placeholder=""></div>
           <div class="hint">Checking, cash, or other money you could actually use today.</div>
         </div>
 
         <div class="field">
           <label>Next income amount</label>
-          <div class="money-wrap"><span>$</span><input id="incomeComing" inputmode="decimal" placeholder="0.00"></div>
+          <div class="money-wrap"><span>$</span><input id="incomeComing" inputmode="decimal" placeholder=""></div>
           <div class="hint">Your next paycheck, gig payment, reimbursement, or other expected income.</div>
         </div>
 
@@ -1421,13 +1441,13 @@ button,input{font:inherit}
 
         <div class="field">
           <label id="billsLabel">Bills and required expenses due before your next income</label>
-          <div class="money-wrap"><span>$</span><input id="billsDue" inputmode="decimal" placeholder="0.00"></div>
+          <div class="money-wrap"><span>$</span><input id="billsDue" inputmode="decimal" placeholder=""></div>
           <div class="hint" id="billsHint">Add only the bills and required spending that must be covered before that income arrives.</div>
         </div>
 
         <div class="field">
           <label>Protected savings you do not want to touch</label>
-          <div class="money-wrap"><span>$</span><input id="protected" inputmode="decimal" placeholder="0.00"></div>
+          <div class="money-wrap"><span>$</span><input id="protected" inputmode="decimal" placeholder=""></div>
           <div class="hint">Optional, but useful if part of your current balance is off-limits.</div>
         </div>
       </div>
@@ -1438,16 +1458,17 @@ button,input{font:inherit}
         <div class="cart-item" id="cartItem">Your purchase</div>
 
         <div class="cart-math">
-          <div><span>Money available now</span><strong id="outCurrent">$0.00</strong></div>
-          <div><span>Income coming in</span><strong id="outIncome">$0.00</strong></div>
-          <div><span>Bills + protected savings</span><strong id="outObligations">$0.00</strong></div>
-          <div class="available-line"><span>Room before purchase</span><strong id="outRoom">$0.00</strong></div>
-          <div><span>Purchase</span><strong id="outPurchase">$0.00</strong></div>
+          <div><span>Money available now</span><strong id="outCurrent">—</strong></div>
+          <div><span>Bills + protected savings</span><strong id="outObligations">—</strong></div>
+          <div class="available-line"><span>Safe before next income</span><strong id="outCurrentRoom">—</strong></div>
+          <div><span>Next income</span><strong id="outIncome">—</strong></div>
+          <div class="available-line"><span>Available after next income</span><strong id="outFutureRoom">—</strong></div>
+          <div><span>Purchase</span><strong id="outPurchase">—</strong></div>
         </div>
 
         <div class="cart-answer">
           <span>ROOM LEFT AFTER PURCHASE</span>
-          <strong id="outAfter">$0.00</strong>
+          <strong id="outAfter">—</strong>
           <small>after the bills and protected money you entered</small>
         </div>
 
@@ -1474,22 +1495,21 @@ button,input{font:inherit}
 
     <div class="tradeoff-grid">
       <div class="tradeoff-card">
-        <small>ROOM BEFORE PURCHASE</small>
-        <strong id="rRoom">$0.00</strong>
-        <span>after bills + protected savings</span>
+        <small>SAFE BEFORE NEXT INCOME</small>
+        <strong id="rCurrentRoom">—</strong>
+        <span>what is available now after bills + protected savings</span>
       </div>
 
       <div class="tradeoff-card">
-        <small>PURCHASE USES</small>
-        <strong id="rPercent">0%</strong>
-        <span>of the room available to you</span>
-        <div class="meter"><i id="meterFill"></i></div>
+        <small>AVAILABLE AFTER NEXT INCOME</small>
+        <strong id="rFutureRoom">—</strong>
+        <span>what the next income adds to this money window</span>
       </div>
 
       <div class="tradeoff-card">
         <small>LEFT AFTER PURCHASE</small>
-        <strong id="rAfter">$0.00</strong>
-        <span>your remaining breathing room</span>
+        <strong id="rAfter">—</strong>
+        <span>remaining room based on the timing recommendation</span>
       </div>
     </div>
 
@@ -1573,7 +1593,7 @@ button,input{font:inherit}
 </div>
 
 <script>
-const ids=["itemName","purchase","currentMoney","incomeComing","incomeDate","billsDue","protected"];
+const ids=["itemName","purchase","currentMoney","incomeComing","incomeDate","billsDue","protected","recurringFrequency"];
 const purchaseTypeRadios=[...document.querySelectorAll('input[name="purchaseType"]')];
 
 function num(v){
@@ -1588,6 +1608,7 @@ function values(){
   const itemName=document.getElementById("itemName").value.trim();
   const purchase=num(document.getElementById("purchase").value);
   const purchaseType=(document.querySelector('input[name="purchaseType"]:checked')||{}).value||"one-time";
+  const recurringFrequency=(document.getElementById("recurringFrequency")||{}).value||"monthly";
   const currentMoney=num(document.getElementById("currentMoney").value);
   const incomeComing=num(document.getElementById("incomeComing").value);
   const incomeDate=document.getElementById("incomeDate").value;
@@ -1600,7 +1621,7 @@ function values(){
   const after=futureRoom-purchase;
   const pct=futureRoom>0?(purchase/futureRoom)*100:0;
 
-  return {itemName,purchase,purchaseType,currentMoney,incomeComing,incomeDate,billsDue,protectedMoney,obligations,currentRoom,futureRoom,after,pct};
+  return {itemName,purchase,purchaseType,recurringFrequency,currentMoney,incomeComing,incomeDate,billsDue,protectedMoney,obligations,currentRoom,futureRoom,after,pct};
 }
 
 function recalc(){
@@ -1611,8 +1632,10 @@ function recalc(){
   oneTime.classList.toggle("active",v.purchaseType==="one-time");
   recurring.classList.toggle("active",v.purchaseType==="recurring");
   document.getElementById("purchaseTypeHint").textContent=v.purchaseType==="recurring"
-    ? "Recurring purchases keep affecting future money windows. This check evaluates the first charge and flags the ongoing impact."
+    ? "Recurring purchases keep affecting future money windows. Choose how often it repeats so the ongoing impact is accurate."
     : "One-time purchases affect this money window once.";
+  const recurringFrequencyField=document.getElementById("recurringFrequencyField");
+  recurringFrequencyField.classList.toggle("show",v.purchaseType==="recurring");
   const recurringCard=document.getElementById("recurringImpactCard");
   recurringCard.style.display=v.purchaseType==="recurring"?"flex":"none";
   const billsLabel=document.getElementById("billsLabel");
@@ -1629,14 +1652,16 @@ function recalc(){
   document.getElementById("outCurrent").textContent=money(v.currentMoney);
   document.getElementById("outIncome").textContent=money(v.incomeComing);
   document.getElementById("outObligations").textContent=money(v.obligations);
-  document.getElementById("outRoom").textContent=money(v.futureRoom);
+  document.getElementById("outCurrentRoom").textContent=money(v.currentRoom);
+  document.getElementById("outFutureRoom").textContent=money(v.futureRoom);
   document.getElementById("outPurchase").textContent=money(v.purchase);
-  document.getElementById("outAfter").textContent=money(v.after);
 
-  document.getElementById("rRoom").textContent=money(v.futureRoom);
-  document.getElementById("rPercent").textContent=(v.futureRoom>0?Math.round(v.pct):0)+"%";
-  document.getElementById("rAfter").textContent=money(v.after);
-  document.getElementById("meterFill").style.width=Math.max(0,Math.min(100,v.pct))+"%";
+  const recommendedRoom=v.currentRoom>=v.purchase?v.currentRoom:v.futureRoom;
+  const recommendedAfter=recommendedRoom-v.purchase;
+  document.getElementById("outAfter").textContent=money(recommendedAfter);
+  document.getElementById("rCurrentRoom").textContent=money(v.currentRoom);
+  document.getElementById("rFutureRoom").textContent=money(v.futureRoom);
+  document.getElementById("rAfter").textContent=money(recommendedAfter);
 
   let title="Enter your numbers.";
   let note="We'll show whether the purchase fits, needs to wait, or is too tight right now.";
@@ -1716,11 +1741,13 @@ function recalc(){
   let summaryTitle=moveTitle;
   let summaryText=moveText;
   if(v.purchaseType==="recurring" && v.purchase>0){
-    const annual=v.purchase*12;
+    const cycles={weekly:52,biweekly:26,monthly:12,quarterly:4,yearly:1};
+    const labels={weekly:"week",biweekly:"2 weeks",monthly:"month",quarterly:"3 months",yearly:"year"};
+    const annual=v.purchase*(cycles[v.recurringFrequency]||12);
     document.getElementById("recurringImpactText").textContent=
-      "At "+money(v.purchase)+" each cycle, this could total about "+money(annual)+" over 12 monthly charges. Make sure the recurring cost fits future months too.";
+      money(v.purchase)+" every "+(labels[v.recurringFrequency]||"month")+" is about "+money(annual)+" per year. This check tests the next charge, while the yearly number shows the ongoing commitment.";
     if(title.startsWith("Yes")){
-      summaryText += " Because this is recurring, also confirm you want this amount built into future months.";
+      summaryText += " Because this repeats, make sure the ongoing "+money(annual)+" yearly commitment also fits your future money plan.";
     }
   }
   document.getElementById("decisionSummaryTitle").textContent=summaryTitle;
@@ -1760,7 +1787,7 @@ try{
   }
 }catch(e){}
 
-recalc();
+if(ids.some(id=>String(document.getElementById(id).value||"").trim()!=="")) recalc();
 </script>
 </body>
 </html>
