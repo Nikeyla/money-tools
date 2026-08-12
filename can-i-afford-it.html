@@ -1362,12 +1362,12 @@ button,input,select{font:inherit}
       <div class="shopping-card">
         <div class="shopping-head"><span>SHOPPING REALITY CHECK</span><span>LIVE</span></div>
         <div class="shopping-body">
-          <div class="item-box"><small>Purchase you're considering</small><strong>—</strong></div>
+          <div class="item-box"><small>Purchase you're considering</small><strong>$120</strong></div>
           <div class="shopping-math">
-            <div class="math-row"><span>Safe before purchase</span><strong>—</strong></div>
-            <div class="math-row"><span>Purchase</span><strong>—</strong></div>
+            <div class="math-row"><span>Safe before purchase</span><strong>$350</strong></div>
+            <div class="math-row"><span>Purchase</span><strong>− $120</strong></div>
           </div>
-          <div class="math-result"><span>SAFE AFTER PURCHASE</span><strong>—</strong><small>without touching protected money</small></div>
+          <div class="math-result"><span>SAFE AFTER PURCHASE</span><strong>$230</strong><small>without touching protected money</small></div>
         </div>
       </div>
       <div class="bag-card"><div class="bag-icon">🛍️</div><strong>Shopping should fit the plan.</strong><span>Not force the plan to recover afterward.</span></div>
@@ -1390,7 +1390,7 @@ button,input,select{font:inherit}
 
         <div class="field">
           <label>Purchase price</label>
-          <div class="money-wrap"><span>$</span><input id="purchase" inputmode="decimal" placeholder=""></div>
+          <div class="money-wrap"><span>$</span><input id="purchase" inputmode="decimal" placeholder="0.00"></div>
           <div class="hint">Use the full checkout price if you know it.</div>
         </div>
 
@@ -1423,13 +1423,13 @@ button,input,select{font:inherit}
 
         <div class="field">
           <label>Money available right now</label>
-          <div class="money-wrap"><span>$</span><input id="currentMoney" inputmode="decimal" placeholder=""></div>
+          <div class="money-wrap"><span>$</span><input id="currentMoney" inputmode="decimal" placeholder="0.00"></div>
           <div class="hint">Checking, cash, or other money you could actually use today.</div>
         </div>
 
         <div class="field">
           <label>Next income amount</label>
-          <div class="money-wrap"><span>$</span><input id="incomeComing" inputmode="decimal" placeholder=""></div>
+          <div class="money-wrap"><span>$</span><input id="incomeComing" inputmode="decimal" placeholder="0.00"></div>
           <div class="hint">Your next paycheck, gig payment, reimbursement, or other expected income.</div>
         </div>
 
@@ -1441,13 +1441,13 @@ button,input,select{font:inherit}
 
         <div class="field">
           <label id="billsLabel">Bills and required expenses due before your next income</label>
-          <div class="money-wrap"><span>$</span><input id="billsDue" inputmode="decimal" placeholder=""></div>
+          <div class="money-wrap"><span>$</span><input id="billsDue" inputmode="decimal" placeholder="0.00"></div>
           <div class="hint" id="billsHint">Add only the bills and required spending that must be covered before that income arrives.</div>
         </div>
 
         <div class="field">
           <label>Protected savings you do not want to touch</label>
-          <div class="money-wrap"><span>$</span><input id="protected" inputmode="decimal" placeholder=""></div>
+          <div class="money-wrap"><span>$</span><input id="protected" inputmode="decimal" placeholder="0.00"></div>
           <div class="hint">Optional, but useful if part of your current balance is off-limits.</div>
         </div>
       </div>
@@ -1458,17 +1458,17 @@ button,input,select{font:inherit}
         <div class="cart-item" id="cartItem">Your purchase</div>
 
         <div class="cart-math">
-          <div><span>Money available now</span><strong id="outCurrent">—</strong></div>
-          <div><span>Bills + protected savings</span><strong id="outObligations">—</strong></div>
-          <div class="available-line"><span>Safe before next income</span><strong id="outCurrentRoom">—</strong></div>
-          <div><span>Next income</span><strong id="outIncome">—</strong></div>
-          <div class="available-line"><span>Available after next income</span><strong id="outFutureRoom">—</strong></div>
-          <div><span>Purchase</span><strong id="outPurchase">—</strong></div>
+          <div><span>Money available now</span><strong id="outCurrent">$0.00</strong></div>
+          <div><span>Bills + protected savings</span><strong id="outObligations">$0.00</strong></div>
+          <div class="available-line"><span>Safe before next income</span><strong id="outCurrentRoom">$0.00</strong></div>
+          <div><span>Next income</span><strong id="outIncome">$0.00</strong></div>
+          <div class="available-line"><span>Available after next income</span><strong id="outFutureRoom">$0.00</strong></div>
+          <div><span>Purchase</span><strong id="outPurchase">$0.00</strong></div>
         </div>
 
         <div class="cart-answer">
           <span>ROOM LEFT AFTER PURCHASE</span>
-          <strong id="outAfter">—</strong>
+          <strong id="outAfter">$0.00</strong>
           <small>after the bills and protected money you entered</small>
         </div>
 
@@ -1496,19 +1496,19 @@ button,input,select{font:inherit}
     <div class="tradeoff-grid">
       <div class="tradeoff-card">
         <small>SAFE BEFORE NEXT INCOME</small>
-        <strong id="rCurrentRoom">—</strong>
+        <strong id="rCurrentRoom">$0.00</strong>
         <span>what is available now after bills + protected savings</span>
       </div>
 
       <div class="tradeoff-card">
         <small>AVAILABLE AFTER NEXT INCOME</small>
-        <strong id="rFutureRoom">—</strong>
+        <strong id="rFutureRoom">$0.00</strong>
         <span>what the next income adds to this money window</span>
       </div>
 
       <div class="tradeoff-card">
         <small>LEFT AFTER PURCHASE</small>
-        <strong id="rAfter">—</strong>
+        <strong id="rAfter">$0.00</strong>
         <span>remaining room based on the timing recommendation</span>
       </div>
     </div>
@@ -1787,7 +1787,7 @@ try{
   }
 }catch(e){}
 
-if(ids.some(id=>String(document.getElementById(id).value||"").trim()!=="")) recalc();
+recalc();
 </script>
 </body>
 </html>

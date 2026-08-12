@@ -1340,32 +1340,32 @@ body{
           </div>
           <div class="money-card-body">
             <div class="spend-row">
-              <div><span class="merchant">Takeout</span><small>Choose a lower target</small></div>
-              <strong>—</strong>
+              <div><span class="merchant">Takeout</span><small>Change to $25</small></div>
+              <strong>$42</strong>
               <span class="pill change-pill">CHANGE</span>
             </div>
             <div class="spend-row">
               <div><span class="merchant">Streaming</span><small>Subscription</small></div>
-              <strong>—</strong>
+              <strong>$18</strong>
               <span class="pill cut-pill">CUT</span>
             </div>
             <div class="spend-row">
               <div><span class="merchant">Coffee Run</span><small>Small purchase</small></div>
-              <strong>—</strong>
+              <strong>$14</strong>
               <span class="pill keep-pill">KEEP</span>
             </div>
             <div class="potential-box">
               <span>POTENTIAL MONEY BACK</span>
-              <strong>—</strong>
-              <small>Calculated from your choices</small>
+              <strong>$35</strong>
+              <small>$17 changed + $18 cut</small>
             </div>
           </div>
         </div>
 
         <div class="goal-card">
           <div class="goal-label">WHAT COULD THAT BECOME?</div>
-          <strong>Your weekly amount</strong>
-          <span>Your yearly impact</span>
+          <strong>$35/week</strong>
+          <span>≈ $1,820/year</span>
           <div class="goal-line"><i></i></div>
           <small>Redirect it toward a goal you actually care about.</small>
         </div>
@@ -1548,7 +1548,7 @@ body{
 const config = {
   subs:{title:"Subscriptions I forgot about",desc:"Streaming, apps, memberships, etc.",rows:5},
   delivery:{title:"Delivery / Takeout / Convenience",desc:"Food delivery, instant delivery, convenience stores, etc.",rows:4},
-  small:{title:"Little Purchases",desc:"Small purchases that don’t fit another category.",rows:5},
+  small:{title:"Little Purchases Under $25",desc:"Small purchases that don’t fit another category.",rows:5},
   fees:{title:"Fees / Interest / Avoidable Charges",desc:"Bank fees, late fees, overdraft, interest, ATM fees, etc.",rows:3},
   impulse:{title:'Impulse / “Why did I buy that?”',desc:"Random buys, things you don’t even remember.",rows:4}
 };
@@ -1571,7 +1571,7 @@ function buildCategory(key,cfg){
           </select>
           <label class="change-target-wrap" id="${key}_change_wrap_${i}">
             <span>CHANGE TO $</span>
-            <input id="${key}_change_${i}" class="amount change-target" inputmode="decimal" aria-label="${cfg.title} new spend amount ${i}" placeholder="">
+            <input id="${key}_change_${i}" class="amount change-target" inputmode="decimal" aria-label="${cfg.title} new spend amount ${i}" placeholder="0.00">
           </label>
         </div>
       </div>`;

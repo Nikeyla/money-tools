@@ -166,12 +166,12 @@ a{text-decoration:none}
 <section class="page" id="pm3">
   <div class="head"><div class="brand">📅 PAYCHECK-TO-MONDAY RESET™ · FREE VERSION</div><div class="badge">PAGE 3 OF 4</div></div>
   <div class="content">
-    <div class="result-hero"><div class="kicker">HERE'S YOUR PLAN</div><h2>You Have <span id="pmSafe">—</span> Safe to Spend</h2><p class="lead" id="pmWhen">Until your next payday.</p></div>
+    <div class="result-hero"><div class="kicker">HERE'S YOUR PLAN</div><h2>You Have <span id="pmSafe">$0.00</span> Safe to Spend</h2><p class="lead" id="pmWhen">Until your next payday.</p></div>
     <div class="grid4">
-      <div class="result-card"><div class="icon">💵</div><small>MONEY UNTIL PAYDAY</small><strong id="pmRoom">—</strong></div>
-      <div class="result-card"><div class="icon">📅</div><small>DAYS UNTIL PAYDAY</small><strong id="pmDays">—</strong></div>
-      <div class="result-card"><div class="icon">🛡️</div><small>PROTECTED SAVINGS</small><strong id="pmProtected">—</strong></div>
-      <div class="result-card"><div class="icon">🐷</div><small>SAFE TO SPEND / DAY</small><strong id="pmDaily">—</strong></div>
+      <div class="result-card"><div class="icon">💵</div><small>MONEY UNTIL PAYDAY</small><strong id="pmRoom">$0</strong></div>
+      <div class="result-card"><div class="icon">📅</div><small>DAYS UNTIL PAYDAY</small><strong id="pmDays">0</strong></div>
+      <div class="result-card"><div class="icon">🛡️</div><small>PROTECTED SAVINGS</small><strong id="pmProtected">$0</strong></div>
+      <div class="result-card"><div class="icon">🐷</div><small>SAFE TO SPEND / DAY</small><strong id="pmDaily">$0</strong></div>
     </div>
     <div class="tip" id="pmTip">You're close. A little planning now can help you avoid stress later.</div>
   </div>
@@ -184,8 +184,8 @@ a{text-decoration:none}
     <div class="upgrade-art">🛡️</div>
     <div class="kicker">PLAN TODAY. STRESS LESS.</div>
     <h2>Your quick reset gave you the number.<br>Want the full payday plan?</h2>
-    <p>The paid Paycheck-to-Monday Reset goes beyond a quick Safe to Spend result and helps you build the actual plan for the days ahead.</p>
-    <div class="upgrade-box"><strong>Unlock the full Paycheck-to-Monday Reset:</strong><div class="bullets"><div>✓ Deeper paycheck planning</div><div>✓ More detailed breakdowns</div><div>✓ Guidance for tight money windows</div><div>✓ A complete plan through payday</div></div></div>
+    <p>The free reset gives you one Safe to Spend number. The full version turns that number into an actual through-payday plan, shows whether your choices fit, and tells you what needs to change when they do not.</p>
+    <div class="upgrade-box"><strong>Unlock the full Paycheck-to-Monday Reset:</strong><div class="bullets"><div>✓ Include money arriving before payday</div><div>✓ Assign your available money by category</div><div>✓ See whether your full plan actually fits</div><div>✓ Get your safe daily spending pace</div><div>✓ See your planned cushion or exact shortfall</div><div>✓ Get personalized move / reduce / delay guidance</div></div></div>
     <a class="paid-cta" href="paycheck-reset.html">SEE WHAT'S INCLUDED →</a>
   </div>
   <div class="privacy">🔒 100% Private &nbsp; • &nbsp; Your entries stay on your device</div>
@@ -199,5 +199,5 @@ function calcPM(){
  pmWhen.textContent=pmDate.value?'Until '+new Date(pmDate.value+'T00:00:00').toLocaleDateString(undefined,{month:'long',day:'numeric'})+'.':'Until your next payday.';
  pmTip.textContent=room>=0?'You have a workable window. Your next paycheck is not counted until it actually arrives. Keep everyday spending near your daily target.':'Your bills and protected savings are higher than the money you have now. Your next paycheck is not counted as spendable yet.';
 }
-document.querySelectorAll('#pm2 input').forEach(e=>e.addEventListener('input',calcPM));
+document.querySelectorAll('#pm2 input').forEach(e=>e.addEventListener('input',calcPM));calcPM();
 </script></body></html>

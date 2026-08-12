@@ -540,6 +540,22 @@ button,input{font:inherit}
   .site-nav .nav-tools::-webkit-scrollbar{display:none!important}
 }
 
+
+.strategy-page{min-height:1360px}
+.payday-strategy{margin-top:22px;background:#fff;border:1px solid #d9e6e7;border-radius:8px;padding:20px}
+.payday-strategy h3{margin:0 0 5px;color:var(--navy);font-size:18px}
+.payday-strategy .strategy-lead{margin:0 0 16px;color:#60727c;font-size:12px;line-height:1.5}
+.strategy-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.strategy-kpi{border:1px solid #dce8e8;border-radius:7px;padding:13px;text-align:center;background:#f8fbfb}
+.strategy-kpi small{display:block;font-size:9px;font-weight:900;color:#687782;text-transform:uppercase}
+.strategy-kpi strong{display:block;margin-top:6px;font-size:20px;color:var(--teal2)}
+.strategy-advice{margin-top:14px;border-left:4px solid var(--gold);background:#fbfaf7;padding:14px 16px;font-size:12px;line-height:1.55;color:#354b5e}
+.strategy-actions{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
+.strategy-action{border:1px solid #e2e8e8;border-radius:7px;padding:12px;background:#fff}
+.strategy-action b{display:block;color:var(--navy);font-size:11px;margin-bottom:4px}
+.strategy-action span{font-size:10px;color:#61737d;line-height:1.4}
+@media(max-width:720px){.strategy-page{min-height:1700px}.strategy-grid,.strategy-actions{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.strategy-grid,.strategy-actions{grid-template-columns:1fr}.strategy-page{min-height:1950px}}
 </style>
 </head>
 <body>
@@ -637,7 +653,7 @@ button,input{font:inherit}
 
 <div class="status" id="status">Enter your numbers. Your Payday Reality Check updates instantly.</div>
 
-<section class="page native-page">
+<section class="page native-page strategy-page">
   <div class="page-head">
     <div class="brand">THE PAYCHECK-TO-MONDAY <span class="accent">RESET™</span></div>
     <div class="badge">PAGE 3 OF 4</div>
@@ -701,6 +717,23 @@ button,input{font:inherit}
         <div class="choice"><div class="choice-icon">◷</div><strong>DELAY SOMETHING</strong><p>Push it to after your next payday.</p></div>
       </div>
     </div>
+
+    <div class="payday-strategy">
+      <h3>Your Through-Payday Strategy</h3>
+      <p class="strategy-lead">This turns your numbers into a working plan, so you know the pace to keep and what to do next.</p>
+      <div class="strategy-grid">
+        <div class="strategy-kpi"><small>Days to Payday</small><strong id="strategy_days">—</strong></div>
+        <div class="strategy-kpi"><small>Safe Daily Pace</small><strong id="strategy_daily">—</strong></div>
+        <div class="strategy-kpi"><small>Planned Cushion</small><strong id="strategy_cushion">—</strong></div>
+        <div class="strategy-kpi"><small>Plan Status</small><strong id="strategy_status" style="font-size:15px">—</strong></div>
+      </div>
+      <div class="strategy-advice" id="strategy_advice">Enter your payday and money plan to get personalized guidance.</div>
+      <div class="strategy-actions">
+        <div class="strategy-action"><b>1. Protect the essentials</b><span id="strategy_action1">Your bills and protected money come first.</span></div>
+        <div class="strategy-action"><b>2. Follow the pace</b><span id="strategy_action2">Your daily pace will appear after you enter a payday.</span></div>
+        <div class="strategy-action"><b>3. Use the cushion on purpose</b><span id="strategy_action3">Any money left unassigned should have a job, not disappear.</span></div>
+      </div>
+    </div>
   </div>
   <div class="footer"><span class="heart">♡</span>You’re in control. Make the choice that works for you.</div>
 </section>
@@ -728,7 +761,7 @@ function setOutput(id,v,show){
   document.getElementById(id).textContent=show?money(v):"";
 }
 
-const mainInputs=["current_money","incoming_money","bills_due","protected_money"];
+const mainInputs=["current_money","incoming_money","bills_due","protected_money","next_payday"];
 const planInputs=["food","gas","kids","me"];
 
 function recalc(){
@@ -778,6 +811,32 @@ function recalc(){
     status.textContent=unassigned>=0
       ? `You’re covered. $${money(unassigned)} is still unassigned.`
       : `Your plan is over by $${money(Math.abs(unassigned))}. Move, reduce, or delay something.`;
+  }
+
+  const paydayEl=document.getElementById("next_payday");
+  let days=0;
+  if(paydayEl && paydayEl.value){
+    const today=new Date();today.setHours(0,0,0,0);
+    const payday=new Date(paydayEl.value+"T00:00:00");
+    days=Math.max(0,Math.ceil((payday-today)/86400000));
+  }
+  const daily=days>0?Math.max(0,room)/days:0;
+  const cushion=hasPlan?unassigned:room;
+  const strategyDays=document.getElementById("strategy_days");
+  if(strategyDays){
+    strategyDays.textContent=paydayEl.value?String(days):"—";
+    document.getElementById("strategy_daily").textContent=paydayEl.value&&room>=0?`$${money(daily)}`:"—";
+    document.getElementById("strategy_cushion").textContent=hasPlan?`$${money(cushion)}`:"—";
+    const ss=document.getElementById("strategy_status");
+    const advice=document.getElementById("strategy_advice");
+    if(!hasMain){ss.textContent="—";advice.textContent="Enter your payday and money plan to get personalized guidance.";}
+    else if(room<0){ss.textContent="SHORTFALL";advice.textContent=`You are $${money(Math.abs(room))} short before everyday spending. Cover the gap first by moving, reducing, or delaying something before using discretionary money.`;}
+    else if(hasPlan&&unassigned<0){ss.textContent="OVER PLANNED";advice.textContent=`Your category plan is $${money(Math.abs(unassigned))} over what you actually have room for. Reduce one category or delay a purchase before payday.`;}
+    else if(hasPlan&&unassigned>=0){ss.textContent="COVERED";advice.textContent=`Your plan fits. Keep about $${money(unassigned)} as your cushion unless you intentionally assign it somewhere else.`;}
+    else {ss.textContent="ROOM AVAILABLE";advice.textContent=paydayEl.value?`You have $${money(room)} available across ${days} day${days===1?'':'s'}, or about $${money(daily)} per day before you build your category plan.`:`You have $${money(room)} available. Add your payday date and category plan to turn that into a daily strategy.`;}
+    document.getElementById("strategy_action1").textContent=`$${money(spoken)} is already spoken for through bills and protected money.`;
+    document.getElementById("strategy_action2").textContent=paydayEl.value&&room>=0?`Keep flexible spending near $${money(daily)} per day on average until payday.`:"Add your next payday date to calculate a safe daily pace.";
+    document.getElementById("strategy_action3").textContent=hasPlan?(unassigned>=0?`You still have $${money(unassigned)} unassigned. Keep it as cushion or give it a specific job.`:`Your plan needs $${money(Math.abs(unassigned))} removed, moved, or delayed.`):"Finish the category plan to see exactly what remains as cushion.";
   }
 }
 

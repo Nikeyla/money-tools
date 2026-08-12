@@ -203,5 +203,5 @@ function calcCA(){
  else if(later>=0){caHeadline.textContent='Wait for the income.';caTip.textContent='It fits after the upcoming income, but not comfortably before it arrives.'}
  else{caHeadline.textContent='Not yet.';caTip.textContent='Even after the upcoming income, this purchase would leave you '+m(Math.abs(later))+' short.'}
 }
-document.querySelectorAll('#ca2 input,#ca2 select').forEach(e=>e.addEventListener('input',calcCA));
+document.querySelectorAll('#ca2 input,#ca2 select').forEach(e=>e.addEventListener('input',calcCA));calcCA();
 </script></body></html>

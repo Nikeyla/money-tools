@@ -142,6 +142,19 @@ a{text-decoration:none}
 .change-plan input{height:32px;width:100%;border:1px solid #c8d9dc;border-radius:7px;padding:0 8px;color:var(--ink);background:#fff}
 @media(max-width:560px){.change-plan{grid-template-columns:1fr minmax(80px,110px)}.change-plan span{grid-column:1/-1}}
 
+
+.simple-list{display:grid;gap:10px;margin-top:12px}
+.simple-row{display:grid;grid-template-columns:1fr 150px;gap:14px;align-items:center;border:1px solid var(--line);border-radius:10px;padding:13px 15px;background:#fff}
+.simple-row strong{font-size:12px;color:var(--navy)}
+.simple-row input{width:100%;height:40px;border:1px solid #c8d9dc;border-radius:7px;padding:0 10px}
+.focus-card{margin-top:16px;background:var(--soft);border:1px solid var(--softline);border-radius:11px;padding:16px}
+.focus-card .grid2{align-items:end}
+.destination-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}
+.destination-btn{border:1px solid #bfd3d5;background:#fff;color:var(--navy);border-radius:8px;padding:11px 8px;font-weight:900;font-size:10px;cursor:pointer}
+.destination-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.destination-message{display:none;margin-top:12px;border-radius:10px;background:var(--soft);border:1px solid var(--softline);padding:14px;color:var(--navy);font-size:12px;line-height:1.5}
+.destination-message.show{display:block}
+@media(max-width:560px){.simple-row{grid-template-columns:1fr 120px}.destination-grid{grid-template-columns:1fr 1fr}}
 </style></head><body>
 <nav class="site-nav"><a class="home" href="index.html">← Free Money Tools</a><a href="money-leak-check-free.html">Money Leak Check</a><a href="paycheck-monday-free.html">Paycheck-to-Monday</a><a href="can-i-afford-it-free.html">Can I Afford It?</a></nav>
 <div class="book">
@@ -162,79 +175,85 @@ a{text-decoration:none}
 <section class="page" id="p2">
   <div class="head"><div class="brand">💧 MONEY LEAK CHECK™ · FREE VERSION</div><div class="badge">PAGE 2 OF 4</div></div>
   <div class="content">
-    <div class="stepbar"><span class="stepnum">1</span><strong>Your Last 7 Days in Categories</strong></div>
-    <p class="lead">Estimate what you spent in each category. Choose Keep, Change, or Cut. If you choose Change, enter what you want to spend instead.</p>
-    <div class="table">
-      <div class="thead"><div>CATEGORY</div><div>SPENT</div><div>KEEP</div><div>CHANGE</div><div>CUT</div></div>
-      <div id="leakRows"></div>
+    <div class="stepbar"><span class="stepnum">1</span><strong>Quick 7-Day Check</strong></div>
+    <p class="lead">Enter what you spent in the broad categories below. This is a quick check, not a transaction-by-transaction audit.</p>
+    <div class="simple-list" id="simpleRows"></div>
+    <div class="focus-card">
+      <strong style="display:block;margin-bottom:12px;color:var(--navy)">Pick one place to tighten up next week.</strong>
+      <div class="grid2">
+        <div class="field"><label>Category I Want to Spend Less On</label><select id="focusCategory"><option value="">Choose a category</option></select></div>
+        <div class="field"><label>How Much Less Could I Spend?</label><input id="focusAmount" type="number" min="0" step=".01"></div>
+      </div>
     </div>
-    <div class="summary-strip"><div><small>YOUR POTENTIAL MONEY BACK</small><br><span style="font-size:9px;color:#6b7d88">7-DAY ESTIMATE</span></div><strong id="leakPotential">—</strong></div>
   </div>
-  <div class="navrow"><button class="back" onclick="scrollTo({top:0,behavior:'smooth'})">← BACK</button><button class="next" onclick="document.getElementById('p3').scrollIntoView({behavior:'smooth'})">CALCULATE MY RESULTS →</button></div>
+  <div class="navrow"><button class="back" onclick="scrollTo({top:0,behavior:'smooth'})">← BACK</button><button class="next" onclick="showLeakResult()">SEE MY QUICK RESULT →</button></div>
 </section>
 
 <section class="page" id="p3">
   <div class="head"><div class="brand">💧 MONEY LEAK CHECK™ · FREE VERSION</div><div class="badge">PAGE 3 OF 4</div></div>
   <div class="content">
-    <div class="result-hero"><div class="kicker">YOUR RESULTS</div><h2>You Could Get <span id="leakHeadline">—</span> Back</h2><p class="lead">That's if you make the changes you chose.</p></div>
+    <div class="result-hero"><div class="kicker">YOUR QUICK RESULT</div><h2>You Could Keep <span id="leakHeadline">—</span> Next Week</h2><p class="lead" id="leakResultLine">Choose one realistic change and give that money a better job.</p></div>
     <div class="grid3">
-      <div class="result-card"><div class="icon">✓</div><small>KEEP</small><strong id="keepTotal">—</strong><span class="small-note">Spending that still feels worth it</span></div>
-      <div class="result-card"><div class="icon">↻</div><small>CHANGE</small><strong id="changeTotal">—</strong><span class="small-note">Money saved by lowering spending</span></div>
-      <div class="result-card"><div class="icon">✕</div><small>CUT</small><strong id="cutTotal">—</strong><span class="small-note">Money you'd rather keep</span></div>
+      <div class="result-card"><div class="icon">🧾</div><small>7-DAY SPENDING ENTERED</small><strong id="totalSpent">—</strong><span class="small-note">Across the categories you entered</span></div>
+      <div class="result-card"><div class="icon">🎯</div><small>YOUR FOCUS</small><strong id="focusName" style="font-size:17px">—</strong><span class="small-note">The one category you chose</span></div>
+      <div class="result-card"><div class="icon">💵</div><small>POTENTIAL MONEY BACK</small><strong id="potentialBack">—</strong><span class="small-note">Based on your own target</span></div>
     </div>
     <div class="card" style="margin-top:14px"><strong style="display:block;margin-bottom:10px;color:var(--navy)">Where will you send this money?</strong>
-      <div class="grid4"><button class="secondary">Emergency Fund</button><button class="secondary">Pay Down Debt</button><button class="secondary">Save for Goals</button><button class="secondary">Other</button></div>
+      <div class="destination-grid">
+        <button class="destination-btn" onclick="chooseDestination(this,'emergency')">Emergency Fund</button>
+        <button class="destination-btn" onclick="chooseDestination(this,'debt')">Pay Down Debt</button>
+        <button class="destination-btn" onclick="chooseDestination(this,'goal')">Save for a Goal</button>
+        <button class="destination-btn" onclick="chooseDestination(this,'other')">Other</button>
+      </div>
+      <div class="destination-message" id="destinationMessage"></div>
     </div>
-    <div class="tip">💡 Small changes today can lead to big results tomorrow.</div>
+    <div class="tip">💡 One useful change is enough for a quick check. The full tool is where you examine the individual purchases behind the category.</div>
   </div>
-  <div class="navrow"><button class="back" onclick="document.getElementById('p2').scrollIntoView({behavior:'smooth'})">← BACK</button><button class="next" onclick="document.getElementById('p4').scrollIntoView({behavior:'smooth'})">CONTINUE TO YOUR PLAN →</button></div>
+  <div class="navrow"><button class="back" onclick="document.getElementById('p2').scrollIntoView({behavior:'smooth'})">← BACK</button><button class="next" onclick="document.getElementById('p4').scrollIntoView({behavior:'smooth'})">SEE THE FULL VERSION →</button></div>
 </section>
 
 <section class="page" id="p4">
   <div class="head"><div class="brand">💧 MONEY LEAK CHECK™ · FREE VERSION</div><div class="badge">PAGE 4 OF 4</div></div>
   <div class="upgrade">
-    <div class="upgrade-art">🌱</div>
-    <div class="kicker">SMALL CHANGES. BIG IMPACT.</div>
-    <h2>You found the leaks.<br>Want the exact transaction-by-transaction version?</h2>
-    <p>Your free check gives you a fast category estimate. The full Money Leak Check lets you work with the actual purchases you made and build a more precise plan.</p>
-    <div class="upgrade-box"><strong>Unlock the full Money Leak Check:</strong><div class="bullets"><div>✓ Review individual transactions</div><div>✓ Make exact Keep / Change / Cut choices</div><div>✓ See transaction-level money-back impact</div><div>✓ Build a complete redirect plan</div></div></div>
+    <div class="upgrade-art">🔎</div>
+    <div class="kicker">THE QUICK CHECK FOUND A DIRECTION</div>
+    <h2>Want to find the exact purchases<br>you can keep, change, or cut?</h2>
+    <p>The free tool looks at broad categories and one realistic change. The full Money Leak Check goes purchase by purchase so you can see exactly where the money is going and build a precise money-back plan.</p>
+    <div class="upgrade-box"><strong>Full Money Leak Check adds:</strong><div class="bullets"><div>✓ Individual purchase entry inside each category</div><div>✓ Keep / Change / Cut decision for every purchase</div><div>✓ Exact savings from each change or cut</div><div>✓ Monthly and yearly impact from your choices</div><div>✓ Money-back goal and redirect plan</div><div>✓ Save progress and print your completed plan</div></div></div>
     <a class="paid-cta" href="money-leak-check.html">UNLOCK THE FULL TOOL →</a>
   </div>
   <div class="privacy">🔒 100% Private &nbsp; • &nbsp; Your entries stay on your device</div>
 </section>
 </div><script>
 const leakCats=["Dining Out","Shopping","Subscriptions","Entertainment","Transportation","Other"];
-const leakRows=document.getElementById('leakRows');
-let leakState=leakCats.map(c=>({cat:c,amt:0,decision:null,target:0}));
-function renderLeak(){
-  leakRows.innerHTML=leakState.map((r,i)=>`
-    <div class="trow">
-      <div>${r.cat}</div>
-      <div><input style="height:30px;padding:0 6px;width:100%" type="number" min="0" step=".01" value="${r.amt || ''}" oninput="leakState[${i}].amt=+this.value||0;calcLeak()"></div>
-      ${["keep","change","cut"].map(d=>`<div><div class="choice ${r.decision===d?'on':''}" onclick="setLeakDecision(${i},'${d}')"></div></div>`).join('')}
-    </div>
-    ${r.decision==="change"?`<div class="change-plan"><span>CHANGE means spend less, not cut it completely.</span><strong>CHANGE TO $</strong><input aria-label="${r.cat} new spending amount" type="number" min="0" step=".01" value="${r.target || ''}" oninput="leakState[${i}].target=+this.value||0;calcLeak()"></div>`:""}
-  `).join('');
+const simpleRows=document.getElementById('simpleRows');
+const focusCategory=document.getElementById('focusCategory');
+const spend={};
+function money(n){return '$'+Number(n).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})}
+simpleRows.innerHTML=leakCats.map(c=>`<div class="simple-row"><strong>${c}</strong><input type="number" min="0" step=".01" aria-label="${c} spending" data-cat="${c}"></div>`).join('');
+focusCategory.innerHTML+=""+leakCats.map(c=>`<option value="${c}">${c}</option>`).join('');
+document.querySelectorAll('[data-cat]').forEach(el=>el.addEventListener('input',()=>{spend[el.dataset.cat]=+el.value||0}));
+function showLeakResult(){
+  const category=focusCategory.value;
+  const amount=Math.max(0,+document.getElementById('focusAmount').value||0);
+  const total=Object.values(spend).reduce((a,b)=>a+b,0);
+  document.getElementById('totalSpent').textContent=total?money(total):'—';
+  document.getElementById('focusName').textContent=category||'—';
+  document.getElementById('potentialBack').textContent=amount?money(amount):'—';
+  document.getElementById('leakHeadline').textContent=amount?money(amount):'—';
+  document.getElementById('leakResultLine').textContent=category&&amount?`You chose to spend ${money(amount)} less on ${category} next week.`:'Choose one category and a realistic amount to spend less next week.';
+  document.getElementById('p3').scrollIntoView({behavior:'smooth'});
 }
-function setLeakDecision(i,d){
-  leakState[i].decision=d;
-  if(d!=="change") leakState[i].target=0;
-  renderLeak();calcLeak();
+function chooseDestination(btn,type){
+  document.querySelectorAll('.destination-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');
+  const amount=Math.max(0,+document.getElementById('focusAmount').value||0);
+  const amt=amount?money(amount):'the money you free up';
+  const msgs={
+    emergency:`Good choice. When you make the change, move ${amt} to your emergency fund so it does not quietly get spent somewhere else.`,
+    debt:`Put ${amt} toward a debt payment in addition to what you already planned to pay. That turns a spending cut into visible progress.`,
+    goal:`Move ${amt} into the savings account or bucket tied to your goal. Give the money a destination before something else claims it.`,
+    other:`Decide the job before you spend it. Write down exactly where ${amt} is going, then move it there when you make the change.`
+  };
+  const box=document.getElementById('destinationMessage');box.textContent=msgs[type];box.classList.add('show');
 }
-function m(n){return '$'+n.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})}
-function calcLeak(){
-  let k=0,c=0,x=0;
-  leakState.forEach(r=>{
-    if(r.decision==='keep')k+=r.amt;
-    else if(r.decision==='change')c+=Math.max(0,r.amt-Math.min(r.amt,Math.max(0,r.target||0)));
-    else if(r.decision==='cut')x+=r.amt;
-  });
-  let p=c+x;
-  leakPotential.textContent=m(p);
-  leakHeadline.textContent=m(p);
-  keepTotal.textContent=m(k);
-  changeTotal.textContent=m(c);
-  cutTotal.textContent=m(x);
-}
-renderLeak();
 </script></body></html>
