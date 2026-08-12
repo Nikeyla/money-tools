@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Money Leak Check Free</title>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Money Leak Check Lite</title>
 <style>
 :root{
   --navy:#0b3156; --ink:#17324a; --muted:#6b7d88; --bg:#eef3f4;
@@ -155,11 +155,55 @@ a{text-decoration:none}
 .destination-message{display:none;margin-top:12px;border-radius:10px;background:var(--soft);border:1px solid var(--softline);padding:14px;color:var(--navy);font-size:12px;line-height:1.5}
 .destination-message.show{display:block}
 @media(max-width:560px){.simple-row{grid-template-columns:1fr 120px}.destination-grid{grid-template-columns:1fr 1fr}}
-</style></head><body>
-<nav class="site-nav"><a class="home" href="index.html">← Free Money Tools</a><a href="money-leak-check-free.html">Money Leak Check</a><a href="paycheck-monday-free.html">Paycheck-to-Monday</a><a href="can-i-afford-it-free.html">Can I Afford It?</a></nav>
+
+/* Spacing refinement: page 3 */
+.book > .page:nth-of-type(3) .content {
+  padding-bottom: 62px !important;
+}
+.book > .page:nth-of-type(3) .navrow {
+  bottom: 18px !important;
+}
+.book > .page:nth-of-type(3) .tip,
+.book > .page:nth-of-type(3) .small-note {
+  margin-bottom: 12px !important;
+}
+
+/* Compact Lite page 3: remove unnecessary blank space above bottom navigation */
+.book > .page:nth-of-type(3) {
+  min-height: 0 !important;
+  height: auto !important;
+  padding-bottom: 0 !important;
+}
+.book > .page:nth-of-type(3) .content {
+  padding-bottom: 22px !important;
+}
+.book > .page:nth-of-type(3) .navrow {
+  position: static !important;
+  margin: 14px 28px 22px !important;
+  left: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+}
+.book > .page:nth-of-type(3) .tip,
+.book > .page:nth-of-type(3) .small-note {
+  margin-bottom: 0 !important;
+}
+
+</style>
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-5M6HZL186M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-5M6HZL186M');
+</script>
+
+</head><body>
+<nav class="site-nav"><a class="home" href="index.html">← Lite Money Tools</a><a href="money-leak-check-free.html">Money Leak Check Lite</a><a href="paycheck-monday-free.html">Paycheck-to-Monday Lite</a><a href="can-i-afford-it-free.html">Can I Afford It? Lite</a></nav>
 <div class="book">
 <section class="page">
-  <div class="head"><div class="brand">💧 MONEY LEAK CHECK™ · FREE VERSION</div><div class="badge">PAGE 1 OF 4</div></div>
+  <div class="head"><div class="brand">💧 MONEY LEAK CHECK™ · LITE VERSION</div><div class="badge">PAGE 1 OF 4</div></div>
   <div class="hero">
     <div class="kicker">FIND THE SMALL LEAKS</div>
     <h1>Welcome to Money Leak Check</h1>
@@ -173,7 +217,7 @@ a{text-decoration:none}
 </section>
 
 <section class="page" id="p2">
-  <div class="head"><div class="brand">💧 MONEY LEAK CHECK™ · FREE VERSION</div><div class="badge">PAGE 2 OF 4</div></div>
+  <div class="head"><div class="brand">💧 MONEY LEAK CHECK™ · LITE VERSION</div><div class="badge">PAGE 2 OF 4</div></div>
   <div class="content">
     <div class="stepbar"><span class="stepnum">1</span><strong>Quick 7-Day Check</strong></div>
     <p class="lead">Enter what you spent in the broad categories below. This is a quick check, not a transaction-by-transaction audit.</p>
@@ -190,7 +234,7 @@ a{text-decoration:none}
 </section>
 
 <section class="page" id="p3">
-  <div class="head"><div class="brand">💧 MONEY LEAK CHECK™ · FREE VERSION</div><div class="badge">PAGE 3 OF 4</div></div>
+  <div class="head"><div class="brand">💧 MONEY LEAK CHECK™ · LITE VERSION</div><div class="badge">PAGE 3 OF 4</div></div>
   <div class="content">
     <div class="result-hero"><div class="kicker">YOUR QUICK RESULT</div><h2>You Could Keep <span id="leakHeadline">—</span> Next Week</h2><p class="lead" id="leakResultLine">Choose one realistic change and give that money a better job.</p></div>
     <div class="grid3">
@@ -213,7 +257,7 @@ a{text-decoration:none}
 </section>
 
 <section class="page" id="p4">
-  <div class="head"><div class="brand">💧 MONEY LEAK CHECK™ · FREE VERSION</div><div class="badge">PAGE 4 OF 4</div></div>
+  <div class="head"><div class="brand">💧 MONEY LEAK CHECK™ · LITE VERSION</div><div class="badge">PAGE 4 OF 4</div></div>
   <div class="upgrade">
     <div class="upgrade-art">🔎</div>
     <div class="kicker">THE QUICK CHECK FOUND A DIRECTION</div>
@@ -256,4 +300,51 @@ function chooseDestination(btn,type){
   };
   const box=document.getElementById('destinationMessage');box.textContent=msgs[type];box.classList.add('show');
 }
-</script></body></html>
+</script>
+<script>
+(function () {
+  function sendEvent(name, params) {
+    params = params || {};
+    params.tool = 'money_leak_lite';
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', name, params);
+    }
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push(Object.assign({event:name}, params));
+  }
+
+  // Distinct page/tool-use event.
+  sendEvent('money_leak_lite_view', {
+    page_title: document.title,
+    page_path: window.location.pathname
+  });
+
+  // Track meaningful outbound/upgrade links without interfering with navigation.
+  document.addEventListener('click', function (e) {
+    const link = e.target.closest('a');
+    if (!link) return;
+
+    const href = link.getAttribute('href') || '';
+    const text = (link.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 120);
+    const classes = link.className || '';
+
+    let eventName = '';
+    if (/sheetwork\.html|spreadsheets\/d\//i.test(href)) {
+      eventName = 'sheetwork_interest_click';
+    } else if (/paid|upgrade|full|premium/i.test(String(classes) + ' ' + text)) {
+      eventName = 'tool_upgrade_click';
+    } else if (/free\.html|paycheck-reset|money-leak-check|can-i-afford-it/i.test(href)) {
+      eventName = 'tool_navigation_click';
+    }
+
+    if (eventName) {
+      sendEvent(eventName, {
+        link_text: text,
+        link_url: link.href || href
+      });
+    }
+  });
+})();
+</script>
+
+</body></html>

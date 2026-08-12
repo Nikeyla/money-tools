@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Can I Afford It Free</title>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Can I Afford It? Lite</title>
 <style>
 :root{
   --navy:#0b3156; --ink:#17324a; --muted:#6b7d88; --bg:#eef3f4;
@@ -132,11 +132,55 @@ a{text-decoration:none}
   .thead,.trow{grid-template-columns:1.3fr .7fr .5fr .5fr .5fr}
   .upgrade-box .bullets{grid-template-columns:1fr}
 }
-:root{--accent:#6b40c6;--soft:#f3effc;--softline:#dfd5f6}</style></head><body>
-<nav class="site-nav"><a class="home" href="index.html">← Free Money Tools</a><a href="money-leak-check-free.html">Money Leak Check</a><a href="paycheck-monday-free.html">Paycheck-to-Monday</a><a href="can-i-afford-it-free.html">Can I Afford It?</a></nav>
+:root{--accent:#6b40c6;--soft:#f3effc;--softline:#dfd5f6}
+/* Spacing refinement: page 3 */
+.book > .page:nth-of-type(3) .content {
+  padding-bottom: 62px !important;
+}
+.book > .page:nth-of-type(3) .navrow {
+  bottom: 18px !important;
+}
+.book > .page:nth-of-type(3) .tip,
+.book > .page:nth-of-type(3) .small-note {
+  margin-bottom: 12px !important;
+}
+
+/* Compact Lite page 3: remove unnecessary blank space above bottom navigation */
+.book > .page:nth-of-type(3) {
+  min-height: 0 !important;
+  height: auto !important;
+  padding-bottom: 0 !important;
+}
+.book > .page:nth-of-type(3) .content {
+  padding-bottom: 22px !important;
+}
+.book > .page:nth-of-type(3) .navrow {
+  position: static !important;
+  margin: 14px 28px 22px !important;
+  left: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+}
+.book > .page:nth-of-type(3) .tip,
+.book > .page:nth-of-type(3) .small-note {
+  margin-bottom: 0 !important;
+}
+
+</style>
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-5M6HZL186M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-5M6HZL186M');
+</script>
+
+</head><body>
+<nav class="site-nav"><a class="home" href="index.html">← Lite Money Tools</a><a href="money-leak-check-free.html">Money Leak Check Lite</a><a href="paycheck-monday-free.html">Paycheck-to-Monday Lite</a><a href="can-i-afford-it-free.html">Can I Afford It? Lite</a></nav>
 <div class="book">
 <section class="page">
-  <div class="head"><div class="brand">🛒 CAN I AFFORD IT?™ · FREE VERSION</div><div class="badge">PAGE 1 OF 4</div></div>
+  <div class="head"><div class="brand">🛒 CAN I AFFORD IT?™ · LITE VERSION</div><div class="badge">PAGE 1 OF 4</div></div>
   <div class="hero">
     <div class="kicker">MAKE SMARTER SPENDING DECISIONS</div><h1>Can I Afford It?</h1><p>Find out if one purchase fits your money picture without hurting what matters.</p>
     <div class="hero-icon">🛍️</div>
@@ -147,7 +191,7 @@ a{text-decoration:none}
 </section>
 
 <section class="page" id="ca2">
-  <div class="head"><div class="brand">🛒 CAN I AFFORD IT?™ · FREE VERSION</div><div class="badge">PAGE 2 OF 4</div></div>
+  <div class="head"><div class="brand">🛒 CAN I AFFORD IT?™ · LITE VERSION</div><div class="badge">PAGE 2 OF 4</div></div>
   <div class="content">
     <div class="stepbar"><span class="stepnum">1</span><strong>Your Financial Snapshot</strong></div>
     <div class="card"><div class="field"><label>What are you thinking about buying?</label><input id="caItem" placeholder="Shoes, phone, vacation..."></div></div>
@@ -165,7 +209,7 @@ a{text-decoration:none}
 </section>
 
 <section class="page" id="ca3">
-  <div class="head"><div class="brand">🛒 CAN I AFFORD IT?™ · FREE VERSION</div><div class="badge">PAGE 3 OF 4</div></div>
+  <div class="head"><div class="brand">🛒 CAN I AFFORD IT?™ · LITE VERSION</div><div class="badge">PAGE 3 OF 4</div></div>
   <div class="content">
     <div class="result-hero"><div class="kicker">CAN YOU AFFORD IT?</div><h2 id="caHeadline">Here's your answer.</h2><p class="lead">Based on the money, obligations, and income you entered.</p></div>
     <div class="grid3">
@@ -179,7 +223,7 @@ a{text-decoration:none}
 </section>
 
 <section class="page" id="ca4">
-  <div class="head"><div class="brand">🛒 CAN I AFFORD IT?™ · FREE VERSION</div><div class="badge">PAGE 4 OF 4</div></div>
+  <div class="head"><div class="brand">🛒 CAN I AFFORD IT?™ · LITE VERSION</div><div class="badge">PAGE 4 OF 4</div></div>
   <div class="upgrade">
     <div class="upgrade-art">📝</div>
     <div class="kicker">SMART DECISIONS. BETTER FUTURE.</div>
@@ -204,4 +248,51 @@ function calcCA(){
  else{caHeadline.textContent='Not yet.';caTip.textContent='Even after the upcoming income, this purchase would leave you '+m(Math.abs(later))+' short.'}
 }
 document.querySelectorAll('#ca2 input,#ca2 select').forEach(e=>e.addEventListener('input',calcCA));calcCA();
-</script></body></html>
+</script>
+<script>
+(function () {
+  function sendEvent(name, params) {
+    params = params || {};
+    params.tool = 'can_i_afford_it_lite';
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', name, params);
+    }
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push(Object.assign({event:name}, params));
+  }
+
+  // Distinct page/tool-use event.
+  sendEvent('can_i_afford_it_lite_view', {
+    page_title: document.title,
+    page_path: window.location.pathname
+  });
+
+  // Track meaningful outbound/upgrade links without interfering with navigation.
+  document.addEventListener('click', function (e) {
+    const link = e.target.closest('a');
+    if (!link) return;
+
+    const href = link.getAttribute('href') || '';
+    const text = (link.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 120);
+    const classes = link.className || '';
+
+    let eventName = '';
+    if (/sheetwork\.html|spreadsheets\/d\//i.test(href)) {
+      eventName = 'sheetwork_interest_click';
+    } else if (/paid|upgrade|full|premium/i.test(String(classes) + ' ' + text)) {
+      eventName = 'tool_upgrade_click';
+    } else if (/free\.html|paycheck-reset|money-leak-check|can-i-afford-it/i.test(href)) {
+      eventName = 'tool_navigation_click';
+    }
+
+    if (eventName) {
+      sendEvent(eventName, {
+        link_text: text,
+        link_url: link.href || href
+      });
+    }
+  });
+})();
+</script>
+
+</body></html>
